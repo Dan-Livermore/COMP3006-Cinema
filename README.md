@@ -1,1 +1,4 @@
-# 3006cinema
+# 3006 Full Stack Application
+## Cinema Booking System
+
+For only Ryan Gosling Films
