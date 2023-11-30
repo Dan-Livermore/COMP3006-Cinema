@@ -1,25 +1,30 @@
+version: '3'
+
 services:
-  3006frontendReact:
-    build:
-      context: .
-      dockerfile: Dockerfile.reactUI
-    ports:
-      - "3000:3000"   
-    depends_on:
-      - db
-  3006backendNode:
-    build:
-      context: ./server
-      dockerfile: Dockerfile.node
-    ports:
-      - "9000:9000"   
-    depends_on:
-      - db
-  db:
-    volumes:
-      - slack_db:/data/db
+  mongodb:
     image: mongo:latest
     ports:
-      - "27017:27017" 
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+
+  express:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - "3060:3060"
+    depends_on:
+      - mongodb
+
+  react:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    ports:
+      - "30:61"
+    depends_on:
+      - express
+
 volumes:
-   slack_db:
+  mongodb_data:
