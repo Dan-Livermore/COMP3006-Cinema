@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { AiOutlineEdit } from "react-icons/ai";
 import { BsInfoCircle } from "react-icons/bs";
 import { MdOutlineAddBox, MdOutlineDelete } from "react-icons/md";
+import { SeatGrid } from "../Components/Seats"
 
 
 const Home = () => {
@@ -24,6 +25,7 @@ const Home = () => {
       });
   }, []);
   return (
+    <><SeatGrid />
     <div className="p-4">
       <div className="flex justify-between items-center">
         <h1 className="text-3xl my-8">Films List</h1>
@@ -93,7 +95,7 @@ const Home = () => {
           </tbody>
         </table>
       )}
-    </div>
+    </div></>
   );
 };
 
