@@ -3,12 +3,12 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-import Film1 from "../assets/slider/Drive.webp";
-import Film2 from "../assets/slider/BladeRunner2049.webp";
-import Film3 from "../assets/slider/Barbie.webp";
-import Film4 from "../assets/slider/TheNiceGuys.webp";
-import Film5 from "../assets/slider/LaLaLand.webp";
-import Film6 from "../assets/slider/TheFallGuy.webp";
+import Film1 from "../assets/Posters/Drive.webp";
+import Film2 from "../assets/Posters/BladeRunner2049.webp";
+import Film3 from "../assets/Posters/Barbie.webp";
+import Film4 from "../assets/Posters/TheNiceGuys.webp";
+import Film5 from "../assets/Posters/LaLaLand.webp";
+import Film6 from "../assets/Posters/TheFallGuy.webp";
 
 const ImageSlider = () => {
   const settings = {

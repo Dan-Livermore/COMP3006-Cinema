@@ -1,13 +1,15 @@
 import React from 'react'
-import ImageSlider from '../Components/ImageSlider'
+// import ImageSlider from '../Components/ImageSlider'
+import FilmInfo from '../Components/FilmInfo'
 
 const Home = () => {
   return (
-    <div className=" bg-sky-100">
+    <div className="">
       <h1 className="font-bold text-center text-4xl">Movie Madness</h1>
-      <ImageSlider/>
+      {/* <ImageSlider/> */}
       
-      <h1 className="font-bold text-center text-4xl">Select Theatre:</h1>
+      <h1 className="font-bold text-center text-4xl">Book Now!</h1>
+      <FilmInfo/>
     </div>
   )
 }
