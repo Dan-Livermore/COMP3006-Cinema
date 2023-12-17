@@ -67,7 +67,7 @@ const FilmInfo = () => {
       title: 'Barbie',
       director: 'Greta Gerwig',
       releaseDate: 2023,
-      ageRating: '12',
+      ageRating: '12A',
       runtime: 114,
       description: `Barbie and Ken are having the time of their lives in the colorful and seemingly perfect world of Barbie Land. However, when they get a chance to go to the real world, they soon discover the joys and perils of living among humans.`,
     },
@@ -103,6 +103,8 @@ const FilmInfo = () => {
     },
   ];
   
+  // Sort the items array by releaseDate
+  items.sort((a, b) => a.releaseDate - b.releaseDate);
 
   return (
     <div className='max-w-4xl mx-auto mt-8'>

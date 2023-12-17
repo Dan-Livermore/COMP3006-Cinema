@@ -7,6 +7,11 @@ import FilmTimes from "./pages/FilmTimes";
 import LogIn from "./pages/LogIn";
 import PageNotFound from "./pages/PageNotFound";
 
+
+import CreateAccount from "./pages/CreateAccount";
+import ForgotPassword from "./pages/ForgotPassword";
+import PasswordRequestSent from "./pages/PasswordRequestSent";
+
 function App() {
   return (
     <>
@@ -19,6 +24,11 @@ function App() {
         <Route path="/film-times" element={<FilmTimes />} />
         <Route path="/log-in" element={<LogIn />} />
         <Route path="*" element={<PageNotFound />} />
+
+      
+        <Route path="/create-account" element={<CreateAccount />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/password-request-sent" element={<PasswordRequestSent />} />
       </Routes>
     </Router>
     </>
