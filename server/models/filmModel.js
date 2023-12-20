@@ -11,7 +11,7 @@ const filmSchema = mongoose.Schema(
             required: true,
         },
         releaseDate:{
-            type: Number,
+            type: Date,
             required: true,
         },
         ageRating:{
@@ -21,7 +21,15 @@ const filmSchema = mongoose.Schema(
         runtime:{
             type: Number,
             required: true,
-        }
+        },
+        description:{
+            type: String,
+            required: true,
+        },
+        poster:{
+            type: String,
+            required: true,
+        },
     },
     {
         timestamps: true,

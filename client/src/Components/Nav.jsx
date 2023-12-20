@@ -15,11 +15,8 @@ const Nav = () => {
     <div className="lg:hidden block absolute top-16 w-full left-0 right-0 bg-sky-500 transition">
       <ul className="text-center text-xl p-20">
         {/* Links for sections*/}
-        <Link spy={true} smooth={true} to="/whats-new">
-          <li className="my-4 py-4 border-b border-sky-500 hover:bg-sky-500 hover:text-zinc-400 hover:rounded cursor-pointer spy={true} smooth={true}">What's New</li>
-        </Link>
-        <Link spy={true} smooth={true} to="/film-times">
-          <li className="my-4 py-4 border-b border-sky-500 hover:bg-sky-500 hover:text-zinc-400 hover:rounded cursor-pointer spy={true} smooth={true}">Film Times</li>
+        <Link spy={true} smooth={true} to="/book-film">
+          <li className="my-4 py-4 border-b border-sky-500 hover:bg-sky-500 hover:text-zinc-400 hover:rounded cursor-pointer spy={true} smooth={true}">Book Film</li>
         </Link>
         <Link spy={true} smooth={true} to="/log-in">
           <li className="my-4 py-4 border-b border-sky-500 hover:bg-sky-500 hover:text-zinc-400 hover:rounded cursor-pointer spy={true} smooth={true}">Log In</li>
@@ -46,11 +43,8 @@ const Nav = () => {
           <div className="flex-10">
             <ul className="flex gap-8 mr-0 ml-auto text-[18px]">
               {/* links for sections */}
-              <Link spy={true} smooth={true} to="/whats-new">
-                <li className="hover:text-zinc-400 transition border-b-0 border-sky-600 hover:border-zinc-400 cursor-pointer">What's New</li>
-              </Link>
-              <Link spy={true} smooth={true} to="/film-times">
-                <li className="hover:text-zinc-400 transition border-b-0 border-sky-600 hover:border-zinc-400 cursor-pointer">Film Times</li>
+              <Link spy={true} smooth={true} to="/book-film">
+                <li className="hover:text-zinc-400 transition border-b-0 border-sky-600 hover:border-zinc-400 cursor-pointer">Book Film</li>
               </Link>
               <Link spy={true} smooth={true} to="/log-in">
                 <li className="hover:text-zinc-400 transition border-b-0 border-sky-600 hover:border-zinc-400 cursor-pointer">Log In</li>

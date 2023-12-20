@@ -11,11 +11,13 @@ router.post('/', async (request, response) => {
       !request.body.director ||
       !request.body.releaseDate ||
       !request.body.ageRating ||
-      !request.body.runtime
+      !request.body.runtime ||
+      !request.body.description ||
+      !request.body.poster 
     ) {
       return response.status(400).send({
         message:
-          'Send all required fields: title, director, releaseDate, ageRating, runtime',
+          'Send all required fields: title, director, releaseDate, ageRating, runtime, description, poster',
       });
     }
     const newFilm = {
@@ -24,6 +26,8 @@ router.post('/', async (request, response) => {
       releaseDate: request.body.releaseDate,
       ageRating: request.body.ageRating,
       runtime: request.body.runtime,
+      description: request.body.description,
+      poster: request.body.poster,
     };
 
     const film = await Film.create(newFilm);
@@ -73,7 +77,9 @@ router.put('/:id', async (request, response) => {
       !request.body.director ||
       !request.body.releaseDate ||
       !request.body.ageRating ||
-      !request.body.runtime
+      !request.body.runtime ||
+      !request.body.description ||
+      !request.body.poster 
     ) {
       return response.status(400).send({
         message:

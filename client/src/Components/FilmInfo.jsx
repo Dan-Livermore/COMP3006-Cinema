@@ -1,11 +1,11 @@
 import React from 'react';
 
-import Image1 from '../assets/Posters/Drive.webp'
-import Image2 from '../assets/Posters/BladeRunner2049.webp';
-import Image3 from '../assets/Posters/Barbie.webp';
-import Image4 from '../assets/Posters/TheNiceGuys.webp';
-import Image5 from '../assets/Posters/LaLaLand.webp';
-import Image6 from '../assets/Posters/TheFallGuy.webp';
+// import Image1 from '../assets/Posters/Drive.webp'
+// import Image2 from '../assets/Posters/BladeRunner2049.webp';
+// import Image3 from '../assets/Posters/Barbie.webp';
+// import Image4 from '../assets/Posters/TheNiceGuys.webp';
+// import Image5 from '../assets/Posters/LaLaLand.webp';
+// import Image6 from '../assets/Posters/TheFallGuy.webp';
 
 const Film = ({ imageSrc, title, director, releaseDate, ageRating, runtime, description}) => {
   return (
@@ -43,7 +43,8 @@ const FilmInfo = () => {
   const items = [
     {
       id: 1,
-      imageSrc: Image1,
+      // imageSrc: Image1,
+      imageSrc: 'https://upload.wikimedia.org/wikipedia/en/1/13/Drive2011Poster.jpg',
       title: 'Drive',
       director: 'Nicholas Winding Refn',
       releaseDate: 2011,
@@ -53,7 +54,8 @@ const FilmInfo = () => {
     },
     {
       id: 2,
-      imageSrc: Image2,
+      // imageSrc: Image2,
+      imageSrc: 'https://upload.wikimedia.org/wikipedia/en/9/9b/Blade_Runner_2049_poster.png',
       title: 'Blade Runner 2049',
       director: 'Denis Villeneuve',
       releaseDate: 2017,
@@ -63,7 +65,8 @@ const FilmInfo = () => {
     },
     {
       id: 3,
-      imageSrc: Image3,
+      // imageSrc: Image3,
+      imageSrc: 'https://upload.wikimedia.org/wikipedia/en/0/0b/Barbie_2023_poster.jpg',
       title: 'Barbie',
       director: 'Greta Gerwig',
       releaseDate: 2023,
@@ -73,7 +76,8 @@ const FilmInfo = () => {
     },
     {
       id: 4,
-      imageSrc: Image4,
+      // imageSrc: Image4,
+      imageSrc: 'https://upload.wikimedia.org/wikipedia/en/e/e9/The_Nice_Guys_poster.png',
       title: 'The Nice Guys',
       director: 'Shane Black',
       releaseDate: 2016,
@@ -83,7 +87,8 @@ const FilmInfo = () => {
     },
     {
       id: 5,
-      imageSrc: Image5,
+      // imageSrc: Image5,
+      imageSrc: 'https://upload.wikimedia.org/wikipedia/en/a/ab/La_La_Land_%28film%29.png',
       title: 'La La Land',
       director: 'Damien Chazelle',
       releaseDate: 2017,
@@ -93,7 +98,8 @@ const FilmInfo = () => {
     },
     {
       id: 6,
-      imageSrc: Image6,
+      // imageSrc: Image6,
+      imageSrc: 'https://upload.wikimedia.org/wikipedia/en/1/1f/The_Fall_Guy_%282024%29_poster.jpg',
       title: 'The Fall Guy',
       director: 'David Leitch',
       releaseDate: 2024,
