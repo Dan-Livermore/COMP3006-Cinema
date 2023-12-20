@@ -18,6 +18,7 @@ import BookingsList from "./pages/BookingsList";
 import UpdatePassword from "./pages/UpdatePassword";
 import UpdateAccount from "./pages/UpdateAccount";
 import DeleteAccount from "./pages/DeleteAccount";
+import Films from "./pages/mongo/films";
 
 function App() {
   return (
@@ -43,6 +44,8 @@ function App() {
         <Route path="/update-password" element={<UpdatePassword />} />
         <Route path="/update-account-details" element={<UpdateAccount />} />
         <Route path="/delete-account" element={<DeleteAccount />} />
+
+        <Route path="/films" element={<Films />} />
       </Routes>
     </Router>
     </>
