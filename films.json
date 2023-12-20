@@ -1,83 +1,122 @@
-[
-    {
-      "title": "Drive",
-      "director": "Nicholas Winding Refn",
-      "releaseDate":  "2011-08-11T12:00:00.000Z",
-      "ageRating": "15",
-      "runtime": 100,
-      "description": "`A getaway driver falls in love with Irene, a criminal's wife. He gets involved in a robbery attempt and lands himself in trouble with the mob to protect his lover.`",
-      "poster": "https://upload.wikimedia.org/wikipedia/en/1/13/Drive2011Poster.jpg"
-    },
-    {
-      "title": "Blade Runner 2049",
-      "director": "Denis Villeneuve",
-      "releaseDate":  "2017-10-05T12:00:00.000Z",
-      "ageRating": "15",
-      "runtime": 163,
-      "description": "`K, an officer with the Los Angeles Police Department, unearths a secret that could create chaos. He goes in search of a former blade runner who has been missing for over three decades.`",
-      "poster": "https://upload.wikimedia.org/wikipedia/en/9/9b/Blade_Runner_2049_poster.png"
-    },
-    {
-      "title": "Barbie",
-      "director": "Greta Gerwig",
-      "releaseDate":  "2023-07-21T12:00:00.000Z",
-      "ageRating": "12",
-      "runtime": 114,
-      "description": "`Barbie and Ken are having the time of their lives in the colorful and seemingly perfect world of Barbie Land. However, when they get a chance to go to the real world, they soon discover the joys and perils of living among humans.`",
-      "poster": "https://upload.wikimedia.org/wikipedia/en/0/0b/Barbie_2023_poster.jpg"
-    },
-    {
-      "title": "The Nice Guys",
-      "director": "Shane Black",
-      "releaseDate":  "2016-06-03T12:00:00.000Z",
-      "ageRating": "15",
-      "runtime": 116,
-      "description": "`Amelia, a girl in hiding, hires Healy to put March, a detective seeking her, in his place. After two hitmen try to get Healy to reveal her whereabouts, he concernedly pairs with March to find her.`",
-      "poster": "https://upload.wikimedia.org/wikipedia/en/e/e9/The_Nice_Guys_poster.png"
-    },
-    {
-      "title": "La La Land",
-      "director": "Damien Chazelle",
-      "releaseDate": "2017-01-13T12:00:00.000Z",
-      "ageRating": "12",
-      "runtime": 128,
-      "description": "`When Sebastian, a pianist, and Mia, an actress, follow their passion and achieve success in their respective fields, they find themselves torn between their love for each other and their careers.`",
-      "poster": "https://upload.wikimedia.org/wikipedia/en/a/ab/La_La_Land_%28film%29.png"
-    },    
-    {
-      "title": "Lars and the Real Girl",
-      "director": "Craig Gillespie",
-      "releaseDate": "2007-10-12T12:00:00.000Z",
-      "ageRating": "12",
-      "runtime": 106,
-      "description": "`Lars, a delusional young man who is socially-awkward, forges an unconventional relationship with a doll he finds on the Internet.`",
-      "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/d/db/Lars_real_girl.jpg/220px-Lars_real_girl.jpg"
-    },
-    {
-      "title": "Blue Valentine",
-      "director": "Derek Cianfrance",
-      "releaseDate": "2011-01-14T12:00:00.000Z",
-      "ageRating": "15",
-      "runtime": 112,
-      "description": "`Cindy and Dean's dysfunctional marriage fails to stand the test of time as they try to raise their young daughter and rekindle their relationship.`",
-      "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Blue_Valentine_film.jpg/220px-Blue_Valentine_film.jpg"
-    },
-    {
-      "title": "The Fall Guy",
-      "director": "David Leitch",
-      "releaseDate": "2024-05-03T12:00:00.000Z",
-      "ageRating": "N/A",
-      "runtime": 0,
-      "description": "`After leaving the business one year earlier, battle-scarred stuntman Colt Seavers springs back into action when the star of a big studio movie suddenly disappears. As the mystery surrounding the missing actor deepens, Colt soon finds himself ensnared in a sinister plot that pushes him to the edge of a fall more dangerous than any stunt.`",
-      "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/1/1f/The_Fall_Guy_%282024%29_poster.jpg/220px-The_Fall_Guy_%282024%29_poster.jpg"
-    },
-    {
-      "title": "Crazy Stupid Love",
-      "director": "Glenn Ficarra, John Requa",
-      "releaseDate": "2011-09-23T12:00:00.000Z",
-      "ageRating": "12",
-      "runtime": 118,
-      "description": "`Cal, a middle-aged man, is heartbroken when his wife asks for a divorce. However, to get over his loss, he starts picking up women at a bar on the insistence of his new-found friend, Jacob.`",
-      "poster": "https://upload.wikimedia.org/wikipedia/en/7/78/CrazyStupidLovePoster.jpg"
-    }
-]
+{
+  "count": 9,
+  "data": [
+      {
+          "_id": "6583347eed59946e06f53065",
+          "title": "Drive",
+          "director": "Nicholas Winding Refn",
+          "releaseDate": "2011-08-11T12:00:00.000Z",
+          "ageRating": "15",
+          "runtime": 100,
+          "description": "A getaway driver falls in love with Irene, a criminal's wife. He gets involved in a robbery attempt and lands himself in trouble with the mob to protect his lover.",
+          "poster": "https://upload.wikimedia.org/wikipedia/en/1/13/Drive2011Poster.jpg",
+          "createdAt": "2023-12-20T18:37:50.070Z",
+          "updatedAt": "2023-12-20T19:46:27.707Z",
+          "__v": 0
+      },
+      {
+          "_id": "65833491ed59946e06f53068",
+          "title": "Blade Runner 2049",
+          "director": "Denis Villeneuve",
+          "releaseDate": "2017-10-05T12:00:00.000Z",
+          "ageRating": "15",
+          "runtime": 163,
+          "description": "K, an officer with the Los Angeles Police Department, unearths a secret that could create chaos. He goes in search of a former blade runner who has been missing for over three decades.",
+          "poster": "https://upload.wikimedia.org/wikipedia/en/9/9b/Blade_Runner_2049_poster.png",
+          "createdAt": "2023-12-20T18:38:09.804Z",
+          "updatedAt": "2023-12-20T19:45:59.530Z",
+          "__v": 0
+      },
+      {
+          "_id": "6583349aed59946e06f5306a",
+          "title": "Barbie",
+          "director": "Greta Gerwig",
+          "releaseDate": "2023-07-21T12:00:00.000Z",
+          "ageRating": "12",
+          "runtime": 114,
+          "description": "Barbie and Ken are having the time of their lives in the colorful and seemingly perfect world of Barbie Land. However, when they get a chance to go to the real world, they soon discover the joys and perils of living among humans.",
+          "poster": "https://upload.wikimedia.org/wikipedia/en/0/0b/Barbie_2023_poster.jpg",
+          "createdAt": "2023-12-20T18:38:18.503Z",
+          "updatedAt": "2023-12-20T19:45:38.889Z",
+          "__v": 0
+      },
+      {
+          "_id": "658334a2ed59946e06f5306c",
+          "title": "The Nice Guys",
+          "director": "Shane Black",
+          "releaseDate": "2016-06-03T12:00:00.000Z",
+          "ageRating": "15",
+          "runtime": 116,
+          "description": "Amelia, a girl in hiding, hires Healy to put March, a detective seeking her, in his place. After two hitmen try to get Healy to reveal her whereabouts, he concernedly pairs with March to find her.",
+          "poster": "https://upload.wikimedia.org/wikipedia/en/e/e9/The_Nice_Guys_poster.png",
+          "createdAt": "2023-12-20T18:38:26.778Z",
+          "updatedAt": "2023-12-20T19:45:15.063Z",
+          "__v": 0
+      },
+      {
+          "_id": "658334abed59946e06f5306e",
+          "title": "La La Land",
+          "director": "Damien Chazelle",
+          "releaseDate": "2017-01-13T12:00:00.000Z",
+          "ageRating": "12",
+          "runtime": 128,
+          "description": "When Sebastian, a pianist, and Mia, an actress, follow their passion and achieve success in their respective fields, they find themselves torn between their love for each other and their careers.",
+          "poster": "https://upload.wikimedia.org/wikipedia/en/a/ab/La_La_Land_%28film%29.png",
+          "createdAt": "2023-12-20T18:38:35.649Z",
+          "updatedAt": "2023-12-20T19:47:18.901Z",
+          "__v": 0
+      },
+      {
+          "_id": "658334b7ed59946e06f53070",
+          "title": "Lars and the Real Girl",
+          "director": "Craig Gillespie",
+          "releaseDate": "2007-10-12T12:00:00.000Z",
+          "ageRating": "12",
+          "runtime": 106,
+          "description": "Lars, a delusional young man who is socially-awkward, forges an unconventional relationship with a doll he finds on the Internet.",
+          "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/d/db/Lars_real_girl.jpg/220px-Lars_real_girl.jpg",
+          "createdAt": "2023-12-20T18:38:47.488Z",
+          "updatedAt": "2023-12-20T19:43:48.987Z",
+          "__v": 0
+      },
+      {
+          "_id": "658334c1ed59946e06f53072",
+          "title": "Blue Valentine",
+          "director": "Derek Cianfrance",
+          "releaseDate": "2011-01-14T12:00:00.000Z",
+          "ageRating": "15",
+          "runtime": 112,
+          "description": "Cindy and Dean's dysfunctional marriage fails to stand the test of time as they try to raise their young daughter and rekindle their relationship.",
+          "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Blue_Valentine_film.jpg/220px-Blue_Valentine_film.jpg",
+          "createdAt": "2023-12-20T18:38:57.641Z",
+          "updatedAt": "2023-12-20T19:43:21.721Z",
+          "__v": 0
+      },
+      {
+          "_id": "658335a2ed59946e06f53074",
+          "title": "The Fall Guy",
+          "director": "David Leitch",
+          "releaseDate": "2024-05-03T12:00:00.000Z",
+          "ageRating": "N/A",
+          "runtime": 0.1,
+          "description": "Colt Seavers is a stuntman who left the business a year earlier to focus on both his physical and mental health. He's drafted back into service when the star of a mega-budget studio movie, which is being directed by his ex, goes missing.",
+          "poster": "https://upload.wikimedia.org/wikipedia/en/thumb/1/1f/The_Fall_Guy_%282024%29_poster.jpg/220px-The_Fall_Guy_%282024%29_poster.jpg",
+          "createdAt": "2023-12-20T18:42:42.042Z",
+          "updatedAt": "2023-12-20T19:42:51.684Z",
+          "__v": 0
+      },
+      {
+          "_id": "65833820ed59946e06f5307a",
+          "title": "Crazy Stupid Love",
+          "director": "Glenn Ficarra, John Requa",
+          "releaseDate": "2011-09-23T12:00:00.000Z",
+          "ageRating": "12",
+          "runtime": 118,
+          "description": "Cal, a middle-aged man, is heartbroken when his wife asks for a divorce. However, to get over his loss, he starts picking up women at a bar on the insistence of his new-found friend, Jacob.",
+          "poster": "https://upload.wikimedia.org/wikipedia/en/7/78/CrazyStupidLovePoster.jpg",
+          "createdAt": "2023-12-20T18:53:20.591Z",
+          "updatedAt": "2023-12-20T19:42:17.282Z",
+          "__v": 0
+      }
+  ]
+}

@@ -15,6 +15,11 @@ const Films = () => {
     axios
       .get("http://localhost:5555/films")
       .then((response) => {
+        const sortedFilms = response.data.data.sort((a, b) => {
+          const titleA = a.title.toUpperCase();
+          const titleB = b.title.toUpperCase();
+          return titleA.localeCompare(titleB);
+        });
         setFilms(response.data.data);
         setLoading(false);
       })
