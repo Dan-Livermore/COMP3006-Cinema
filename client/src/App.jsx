@@ -8,9 +8,17 @@ import LogIn from "./pages/LogIn";
 import PageNotFound from "./pages/PageNotFound";
 
 
+import Account from "./pages/Account";
 import CreateAccount from "./pages/CreateAccount";
 import ForgotPassword from "./pages/ForgotPassword";
 import PasswordRequestSent from "./pages/PasswordRequestSent";
+
+
+import Bookings from "./pages/Bookings";
+import BookingsList from "./pages/BookingsList";
+import UpdatePassword from "./pages/UpdatePassword";
+import UpdateAccount from "./pages/UpdateAccount";
+import DeleteAccount from "./pages/DeleteAccount";
 
 function App() {
   return (
@@ -26,9 +34,17 @@ function App() {
         <Route path="*" element={<PageNotFound />} />
 
       
+        <Route path="/account" element={<Account />} />
         <Route path="/create-account" element={<CreateAccount />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/password-request-sent" element={<PasswordRequestSent />} />
+
+        
+        <Route path="/bookings" element={<BookingsList />} />
+        <Route path="/booking-details" element={<Bookings />} />
+        <Route path="/update-password" element={<UpdatePassword />} />
+        <Route path="/update-account-details" element={<UpdateAccount />} />
+        <Route path="/delete-account" element={<DeleteAccount />} />
       </Routes>
     </Router>
     </>

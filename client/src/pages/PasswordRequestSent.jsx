@@ -14,7 +14,7 @@ const PasswordRequestSent = () => {
           If you don't receive an email within a few minutes, please check your spam folder.
         </p>
         <br />
-        <Link to="/accounts">
+        <Link to="/log-in">
         <button class="w-full py-3 font-medium text-white bg-sky-600 hover:bg-sky-500 rounded-lg border-sky-500 hover:shadow inline-flex space-x-2 items-center justify-center">         
                 <span>Log In?</span>
               </button>
