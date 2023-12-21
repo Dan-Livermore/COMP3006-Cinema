@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Spinner from "../../Components/Spinner";
 import { Link } from "react-router-dom";
-import { AiOutlineEdit } from "react-icons/ai";
+// import { AiOutlineEdit } from "react-icons/ai";
 import { BsInfoCircle } from "react-icons/bs";
 import { MdOutlineAddBox, MdOutlineDelete } from "react-icons/md";
 
@@ -15,7 +15,7 @@ const Films = () => {
     axios
       .get("http://localhost:5555/films")
       .then((response) => {
-        const sortedFilms = response.data.data.sort((a, b) => {
+        const films = response.data.data.sort((a, b) => {
           const titleA = a.title.toUpperCase();
           const titleB = b.title.toUpperCase();
           return titleA.localeCompare(titleB);
