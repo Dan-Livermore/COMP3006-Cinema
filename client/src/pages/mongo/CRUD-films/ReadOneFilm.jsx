@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import BackButton from '../../../Components/BackButton';
 import Spinner from '../../../Components/Spinner';
 
-const ReadOne = () => {
+const ReadOneFilm = () => {
   const [film, setfilm] = useState({});
   const [loading, setLoading] = useState(false);
   const { id } = useParams();
@@ -78,4 +78,4 @@ const ReadOne = () => {
   );
 };
 
-export default ReadOne;
+export default ReadOneFilm;

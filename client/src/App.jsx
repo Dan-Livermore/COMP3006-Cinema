@@ -19,16 +19,16 @@ import UpdateAccount from "./pages/UpdateAccount";
 import DeleteAccount from "./pages/DeleteAccount";
 
 import Films from "./pages/mongo/films";
-import ReadOne from "./pages/mongo/CRUD-films/ReadOne";
+import ReadOneFilm from "./pages/mongo/CRUD-films/ReadOneFilm";
 import CreateFilm from "./pages/mongo/CRUD-films/CreateFilm";
 import EditFilm from "./pages/mongo/CRUD-films/EditFilm";
 import DeleteFilm from "./pages/mongo/CRUD-films/DeleteFilm";
 
 import Showings from "./pages/mongo/Showings";
-import ReadOne from "./pages/mongo/CRUD-Showings/ReadOne";
-import CreateShowing from "./pages/mongo/CRUD-Showings/CreateShowing";
-import EditShowing from "./pages/mongo/CRUD-Showings/EditShowing";
-import DeleteShowing from "./pages/mongo/CRUD-Showings/DeleteShowing";
+import ReadOneShowing from "./pages/mongo/CRUD-showings/ReadOneShowing";
+import CreateShowing from "./pages/mongo/CRUD-showings/CreateShowing";
+import EditShowing from "./pages/mongo/CRUD-showings/EditShowing";
+import DeleteShowing from "./pages/mongo/CRUD-showings/DeleteShowing";
 
 function App() {
   return (
@@ -56,15 +56,15 @@ function App() {
 
             <Route path="/films" element={<Films />} />
             <Route path="/films/create" element={<CreateFilm />} />
-            <Route path="/films/details/:id" element={<ReadOne />} />
+            <Route path="/films/details/:id" element={<ReadOneFilm />} />
             <Route path="/films/edit/:id" element={<EditFilm />} />
             <Route path="/films/delete/:id" element={<DeleteFilm />} />
 
-            <Route path="/Showings" element={<Showings />} />
-            <Route path="/Showings/create" element={<CreateShowing />} />
-            <Route path="/Showings/details/:id" element={<ReadOne />} />
-            <Route path="/Showings/edit/:id" element={<EditShowing />} />
-            <Route path="/Showings/delete/:id" element={<DeleteShowing />} />
+            <Route path="/showings" element={<Showings />} />
+            <Route path="/showings/create" element={<CreateShowing />} />
+            <Route path="/showings/details/:id" element={<ReadOneShowing />} />
+            <Route path="/showings/edit/:id" element={<EditShowing />} />
+            <Route path="/showings/delete/:id" element={<DeleteShowing />} />
           </Routes>
         </SnackbarProvider>
       </Router>
