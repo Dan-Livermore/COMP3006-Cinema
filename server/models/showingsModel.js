@@ -12,7 +12,7 @@ const showingSchema = mongoose.Schema(
             required: true,
         },
         seats:{
-            type: [[Number]],
+            type: [[String]],
             required: true,
         },
         totalSeats:{

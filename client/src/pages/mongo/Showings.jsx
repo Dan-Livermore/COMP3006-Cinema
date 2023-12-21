@@ -13,9 +13,14 @@ const Showings = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get("http://localhost:5555/showings")
+      .get("http://localhost:5555/showings")      
       .then((showingsResponse) => {
-        setShowings(showingsResponse.data.data);
+        const sortedShowings = showingsResponse.data.data.sort((a, b) => {
+          const dateA = new Date(a.startTime);
+          const dateB = new Date(b.startTime);
+          return dateA - dateB; // Sorts in ascending order by start time
+        });
+        setShowings(sortedShowings); // No need for .data.data
         // Now, fetch films separately
         return axios.get("http://localhost:5555/films");
       })
@@ -123,7 +128,7 @@ const Showings = () => {
                     {showing.seats.map((row, rowIndex) => (
                       <tr key={rowIndex}>
                         {row.map((cell, cellIndex) => (
-                          <td key={cellIndex}>{cell}</td>
+                          <td key={cellIndex}>{cell},</td>
                         ))}
                       </tr>
                     ))}
