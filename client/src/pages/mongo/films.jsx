@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Spinner from "../../Components/Spinner";
 import { Link } from "react-router-dom";
-// import { AiOutlineEdit } from "react-icons/ai";
+import { AiOutlineEdit } from "react-icons/ai";
 import { BsInfoCircle } from "react-icons/bs";
-import { MdOutlineAddBox, MdOutlineDelete } from "react-icons/md";
+import { MdOutlineDelete } from "react-icons/md";
 
 
 const Films = () => {
@@ -44,7 +44,7 @@ const Films = () => {
       <div className="flex justify-between items-center">
         <h1 className="text-3xl my-8">Films List</h1>
         <Link to="/films/create">
-          <MdOutlineAddBox className="text-sky-800 4xl" />
+          <button className="bg-sky-600 text-white rounded-lg w-40 h-10 4xl">Add Film</button>
         </Link>
       </div>
       {loading ? (
@@ -110,10 +110,10 @@ const Films = () => {
                       <BsInfoCircle className="text-2xl text-green-800" />
                     </Link>
                     <Link to={`/films/edit/${film._id}`}>
-                      <BsInfoCircle className="text-2xl text-yellow-600" />
+                      <AiOutlineEdit className="text-2xl text-yellow-600" />
                     </Link>
                     <Link to={`/films/delete/${film._id}`}>
-                      <BsInfoCircle className="text-2xl text-red-600" />
+                      <MdOutlineDelete className="text-2xl text-red-600" />
                     </Link>
                   </div>
                 </td>
