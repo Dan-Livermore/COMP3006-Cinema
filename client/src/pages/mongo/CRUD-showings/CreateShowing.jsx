@@ -6,11 +6,14 @@ import { useNavigate } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
 
 const CreateShowing = () => {
-  const [filmID, setfilmID] = useState('');
-  const [startTime, setstartTime] = useState('');
-  const [seats, setseats] = useState('');
-  const [totalSeats, settotalSeats] = useState('');
-  const [seatsRemaining, setseatsRemaining] = useState('');
+  const [filmID, setFilmID] = useState('');
+  const [startTime, setStartTime] = useState('');
+  const [row1, setRow1] = useState('');
+  const [row2, setRow2] = useState('');
+  const [row3, setRow3] = useState('');
+  const [row4, setRow4] = useState('');
+  const [totalSeats, setTotalSeats] = useState(28);
+  const [seatsRemaining, setSeatsRemaining] = useState(28);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
@@ -19,13 +22,17 @@ const CreateShowing = () => {
     const data = {
       filmID,
       startTime,
-      seats,
+      row1,
+      row2,
+      row3,
+      row4,
       totalSeats,
       seatsRemaining,
     };
+    console.log(data);
     setLoading(true);
     axios
-      .post('http://localhost:5555/films', data)
+      .post('http://localhost:5555/showings', data)
       .then(() => {
         setLoading(false);
         enqueueSnackbar('Showing Created Successfully', { variant: 'success' });
@@ -48,26 +55,57 @@ const CreateShowing = () => {
           <input
             type='text'
             value={filmID}
-            onChange={(e) => setfilmID(e.target.value)}
+            onChange={(e) => setFilmID(e.target.value)}
             className='border-2 border-gray-500 px-4 py-2 w-full'
           />
         </div>
         <div className='my-4'>
-          <label className='text-xl mr-4 text-gray-500'>startTime</label>
+          <label className='text-xl mr-4 text-gray-500'>Start Time</label>
           <input
-            type='date'
+            type='datetime-local'
             value={startTime}
-            onChange={(e) => setstartTime(e.target.value)}
+            onChange={(e) => setStartTime(e.target.value)}
             className='border-2 border-gray-500 px-4 py-2  w-full'
           />
         </div>
         <div className='my-4'>
-          <label className='text-xl mr-4 text-gray-500'>Seats (array)</label>
+          <label className='text-xl mr-4 text-gray-500'>Row 1 (comma-separated string)</label>
           <input
-            type='[[number]]'
-            value={seats}
-            onChange={(e) => setseats(e.target.value)}
+            type='text' // Changed type to accept string input
+            value={row1}
+            onChange={(e) => setRow1(e.target.value)}
             className='border-2 border-gray-500 px-4 py-2  w-full'
+            placeholder='Available, Available, Available, Aisle, Available, Available, Available, Available'
+          />
+        </div>
+        <div className='my-4'>
+          <label className='text-xl mr-4 text-gray-500'>Row 2 (comma-separated string)</label>
+          <input
+            type='text' // Changed type to accept string input
+            value={row2}
+            onChange={(e) => setRow2(e.target.value)}
+            className='border-2 border-gray-500 px-4 py-2  w-full'
+            placeholder='Available, Available, Available, Aisle, Available, Available, Available, Available'
+          />
+        </div>
+        <div className='my-4'>
+          <label className='text-xl mr-4 text-gray-500'>Row 3 (comma-separated string)</label>
+          <input
+            type='text' // Changed type to accept string input
+            value={row3}
+            onChange={(e) => setRow3(e.target.value)}
+            className='border-2 border-gray-500 px-4 py-2  w-full'
+            placeholder='Available, Available, Available, Aisle, Available, Available, Available, Available'
+          />
+        </div>
+        <div className='my-4'>
+          <label className='text-xl mr-4 text-gray-500'>Row 4 (comma-separated string)</label>
+          <input
+            type='text' // Changed type to accept string input
+            value={row4}
+            onChange={(e) => setRow4(e.target.value)}
+            className='border-2 border-gray-500 px-4 py-2  w-full'
+            placeholder='Available, Available, Available, Aisle, Available, Available, Available, Available'
           />
         </div>
         <div className='my-4'>
@@ -75,7 +113,7 @@ const CreateShowing = () => {
           <input
             type='number'
             value={totalSeats}
-            onChange={(e) => settotalSeats(e.target.value)}
+            onChange={(e) => setTotalSeats(e.target.value)}
             className='border-2 border-gray-500 px-4 py-2 w-full'
           />
         </div>
@@ -84,7 +122,7 @@ const CreateShowing = () => {
           <input
             type='number'
             value={seatsRemaining}
-            onChange={(e) => setseatsRemaining(e.target.value)}
+            onChange={(e) => setSeatsRemaining(e.target.value)}
             className='border-2 border-gray-500 px-4 py-2  w-full'
           />
         </div>
@@ -97,4 +135,4 @@ const CreateShowing = () => {
   );
 }
 
-export default CreateShowing
+export default CreateShowing;

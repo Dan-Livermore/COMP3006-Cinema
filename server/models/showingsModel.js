@@ -11,8 +11,20 @@ const showingSchema = mongoose.Schema(
             type: Date,
             required: true,
         },
-        seats:{
-            type: [[String]],
+        row1:{
+            type: String,
+            required: true,
+        },
+        row2:{
+            type: String,
+            required: true,
+        },
+        row3:{
+            type: String,
+            required: true,
+        },
+        row4:{
+            type: String,
             required: true,
         },
         totalSeats:{

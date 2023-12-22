@@ -9,19 +9,25 @@ router.post('/', async (request, response) => {
     if (
       !request.body.filmID ||
       !request.body.startTime ||
-      !request.body.seats ||
+      !request.body.row1 ||
+      !request.body.row2 ||
+      !request.body.row3 ||
+      !request.body.row4 ||
       !request.body.totalSeats ||
       !request.body.seatsRemaining 
     ) {
       return response.status(400).send({
         message:
-          'Send all required fields: filmID, startTime, seats (Array), totalSeats, seatsRemaining.',
+          'Send all required fields: filmID, startTime, all seats, totalSeats, seatsRemaining.',
       });
     }
     const newShowing = {
       filmID: request.body.filmID,
       startTime: request.body.startTime,
-      seats: request.body.seats,
+      row1: request.body.row1,
+      row2: request.body.row2,
+      row3: request.body.row3,
+      row4: request.body.row4,
       totalSeats: request.body.totalSeats,
       seatsRemaining: request.body.seatsRemaining,
     };
@@ -71,9 +77,12 @@ router.put('/:id', async (request, response) => {
     if (
       !request.body.filmID ||
       !request.body.startTime ||
-      !request.body.seats ||
+      !request.body.row1 ||
+      !request.body.row2 ||
+      !request.body.row3 ||
+      !request.body.row4 ||
       !request.body.totalSeats ||
-      !request.body.seatsRemaining
+      !request.body.seatsRemaining 
     ) {
       return response.status(400).send({
         message:

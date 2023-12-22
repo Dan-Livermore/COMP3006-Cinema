@@ -27,6 +27,7 @@ const CreateFilm = () => {
       description,
       poster,
     };
+    console.log(data);
     setLoading(true);
     axios
       .post('http://localhost:5555/films', data)

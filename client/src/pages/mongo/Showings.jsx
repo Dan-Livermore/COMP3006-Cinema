@@ -39,8 +39,7 @@ const Showings = () => {
     const film = films.find((film) => film._id === showing.filmID);
     const formattedDate = formatDate(showing.startTime);
     const filmTitle = film ? film.title : "Unknown Title";
-    // const seats = showing.seats.map(row => `[${row.join(', ')}]`).join('<br>');
-
+  
     return {
       index: index + 1,
       filmID: showing.filmID,
@@ -49,7 +48,10 @@ const Showings = () => {
       totalSeats: showing.totalSeats,
       seatsRemaining: showing.seatsRemaining,
       showingID: showing._id,
-      seats: showing.seats,
+      row1: showing.row1,
+      row2: showing.row2,
+      row3: showing.row3,
+      row4: showing.row4,
     };
   });
 
@@ -119,22 +121,9 @@ const Showings = () => {
                 <td className="border border-slate-700 rounded-md text-center max-md:hidden">
                   {showing.seatsRemaining}
                 </td>
-                {/* <td className="border border-slate-700 rounded-md text-center max-md:hidden">
-                  {showing.seats}
-                </td> */}
                 <td className="border border-slate-700 rounded-md text-center max-md:hidden">
-                <table>
-                  <tbody>
-                    {showing.seats.map((row, rowIndex) => (
-                      <tr key={rowIndex}>
-                        {row.map((cell, cellIndex) => (
-                          <td key={cellIndex}>{cell},</td>
-                        ))}
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </td>
+                  {`${showing.row1}\n${showing.row2}\n${showing.row3}\n${showing.row4}`}
+                </td>
                 <td className="border border-slate-700 rounded-md text-center max-md:hidden">
                   <div className="flex justify-center gap-x-4">
                     <Link to={`/showings/details/${showing._id}`}>
