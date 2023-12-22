@@ -41,6 +41,7 @@ const Showings = () => {
     const filmTitle = film ? film.title : "Unknown Title";
   
     return {
+      _id: showing._id,
       index: index + 1,
       filmID: showing.filmID,
       filmTitle,
