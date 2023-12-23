@@ -55,6 +55,7 @@ const CreateFilm = () => {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             className='border-2 border-gray-500 px-4 py-2 w-full'
+            required
           />
         </div>
         <div className='my-4'>
@@ -64,6 +65,7 @@ const CreateFilm = () => {
             value={director}
             onChange={(e) => setDirector(e.target.value)}
             className='border-2 border-gray-500 px-4 py-2  w-full'
+            required
           />
         </div>
         <div className='my-4'>
@@ -73,6 +75,7 @@ const CreateFilm = () => {
             value={releaseDate}
             onChange={(e) => setReleaseDate(e.target.value)}
             className='border-2 border-gray-500 px-4 py-2  w-full'
+            required
           />
         </div><div className='my-4'>
           <label className='text-xl mr-4 text-gray-500'>Age Rating</label>
@@ -81,6 +84,7 @@ const CreateFilm = () => {
             value={ageRating}
             onChange={(e) => setAgeRating(e.target.value)}
             className='border-2 border-gray-500 px-4 py-2 w-full'
+            required
           />
         </div>
         <div className='my-4'>
@@ -90,6 +94,7 @@ const CreateFilm = () => {
             value={runtime}
             onChange={(e) => setRuntime(e.target.value)}
             className='border-2 border-gray-500 px-4 py-2  w-full'
+            required
           />
         </div>
         <div className='my-4'>
@@ -99,6 +104,7 @@ const CreateFilm = () => {
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             className='border-2 border-gray-500 px-4 py-2  w-full'
+            required
           />
         </div><div className='my-4'>
           <label className='text-xl mr-4 text-gray-500'>Poster</label>
@@ -107,6 +113,7 @@ const CreateFilm = () => {
             value={poster}
             onChange={(e) => setPoster(e.target.value)}
             className='border-2 border-gray-500 px-4 py-2 w-full'
+            required
           />
         </div>
         <button className='p-2 bg-sky-400  hover:bg-sky-600 rounded-lg m-8' onClick={handleSaveFilm}>
