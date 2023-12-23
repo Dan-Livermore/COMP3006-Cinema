@@ -3,7 +3,7 @@ import { PORT, mongoDBURL } from "./config.js";
 import mongoose from "mongoose";
 import filmsRoute from "./routes/filmsRoutes.js";
 import usersRoute from "./routes/usersRoutes.js";
-import accountsRoute from "./routes/accountRoutes.js";
+import signupRoute from "./routes/signupRoutes.js";
 import loginRoute from "./routes/loginRoute.js";
 // import bookingRoute from "./routes/bookingRoutes.js";
 import showingsRoute from "./routes/showingsRoutes.js";
@@ -31,7 +31,7 @@ app.use('/films', filmsRoute);
 app.use('/users', usersRoute);
 // app.use('/bookings', bookingsRoute);
 app.use('/showings', showingsRoute);
-app.use('/signup', accountsRoute);
+app.use('/signup', signupRoute);
 app.use('/login', loginRoute);
 
 mongoose

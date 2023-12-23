@@ -43,7 +43,7 @@ function App() {
             <Route path="/log-in" element={<LogIn />} />
             <Route path="*" element={<PageNotFound />} />
 
-            <Route path="/account" element={<Account />} />
+            <Route path="/account" element={<Account />}/>
             <Route path="/create-account" element={<CreateAccount />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/password-request-sent" element={<PasswordRequestSent />} />

@@ -1,69 +1,40 @@
-import { useRef, useState, useEffect, useContext } from "react";
-import Authenticator from "../Components/Authenticator";
 import { Link } from "react-router-dom";
-
-import axios from "axios";
+import axios from 'axios';
+import { useState } from "react";
 
 const LogIn = () => {
-  const { setAuth } = useContext(Authenticator);
-  const userRef = useRef();
-  const errRef = useRef();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');  
+  
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
 
-  const [user, setUser] = useState("");
-  const [pwd, setPwd] = useState("");
-  const [errMsg, setErrMsg] = useState("");
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
 
-  useEffect(() => {
-    userRef.current.focus();
-  }, []);
-
-  useEffect(() => {
-    setErrMsg("");
-  }, [user, pwd])
-
-  const handleSubmit = async (e) => {
+  const HandleLogIn = async (e) => {
     e.preventDefault();
-    
     try {
-      const response = await axios.post('http://localhost:3000/login',
-          JSON.stringify({ user, pwd }),
-          {
-              headers: { 'Content-Type': 'application/json' },
-              withCredentials: true
-          }
-      );
-      console.log(JSON.stringify(response?.data));
-      //console.log(JSON.stringify(response));
-      const accessToken = response?.data?.accessToken;
-      const roles = response?.data?.roles;
-      setAuth({ user, pwd, roles, accessToken });
-      setUser('');
-      setPwd('');
-  } catch (err) {
-      if (!err?.response) {
-          setErrMsg('No Server Response');
-      } else if (err.response?.status === 400) {
-          setErrMsg('Missing Username or Password');
-      } else if (err.response?.status === 401) {
-          setErrMsg('Unauthorized');
-      } else {
-          setErrMsg('Log In Failed');
-      }
-      errRef.current.focus();
-  }
-}
+      // Make a POST request to your Express route
+      const response = await axios.post('http://localhost:5555/login', {
+        email,
+        password,
+      });
+
+      console.log('Response from server:', response.data);
+      // Handle the response or update the UI as needed
+    } catch (error) {
+      console.error('Error:', error.response.data);
+      // Handle errors if any
+    }
+  };
 
   return (
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center items-center px-6 py-12 lg:px-8 bg-sky-100">
         <div className="bg-white shadow-md rounded-md p-6 max-w-md w-full mt-1 md:mt-0">
-          <p
-            ref={errRef}
-            className={errMsg ? "errMsg" : "offscreen"}
-            aria-live="assertive"
-          >
-            {errMsg}
-          </p>
           <div className="sm:mx-auto sm:w-full sm:max-w-sm">
             <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
               Sign in to your account
@@ -71,7 +42,7 @@ const LogIn = () => {
           </div>
 
           <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form className="space-y-6" onSubmit={handleSubmit}>
+            <form className="space-y-6" onSubmit={HandleLogIn}>
               <div>
                 <label
                   htmlFor="email"
@@ -85,9 +56,8 @@ const LogIn = () => {
                     name="email"
                     type="email"
                     autoComplete="email"
-                    ref={userRef}
-                    onChange={(e) => setUser(e.target.value)}
-                    value={user}
+                    value={email}
+                    onChange={handleEmailChange}
                     required
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
@@ -115,8 +85,7 @@ const LogIn = () => {
                     id="password"
                     name="password"
                     type="password"
-                    onChange={(e) => setPwd(e.target.value)}
-                    value={pwd}
+                    onChange={handlePasswordChange}
                     required
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />

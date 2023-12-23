@@ -1,5 +1,6 @@
 import express from 'express';
 import {User} from '../models/usersModel.js';
+import bcrypt from "bcrypt";
 
 const router = express.Router();
 
@@ -35,13 +36,17 @@ router.get('/:id', async (request, response) => {
 //UPDATE
 router.put('/:id', async (request, response) => {
   try {
-    if (!request.body.username || request.body.password) {
+    if (!request.body.email || !request.body.password) {
+        
       return response.status(400).send({
         message:
           'Enter an email and password',
       });
     }
     const { id } = request.params;
+    
+    request.body.password = await bcrypt.hash(request.body.password, 13);
+
     const result = await User.findByIdAndUpdate(id, request.body);
 
     if (!result) {
