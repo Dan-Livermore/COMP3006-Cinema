@@ -2,10 +2,13 @@ import express from "express";
 import { PORT, mongoDBURL } from "./config.js";
 import mongoose from "mongoose";
 import filmsRoute from "./routes/filmsRoutes.js";
-// import usersRoute from "./routes/usersRoutes.js";
+import usersRoute from "./routes/usersRoutes.js";
+import accountsRoute from "./routes/accountRoutes.js";
+import loginRoute from "./routes/loginRoute.js";
 // import bookingRoute from "./routes/bookingRoutes.js";
 import showingsRoute from "./routes/showingsRoutes.js";
 import cors from 'cors';
+
 
 const app = express();
 
@@ -25,9 +28,11 @@ app.get('/', (request,response) => {
 });
 
 app.use('/films', filmsRoute);
-// app.use('/users', usersRoute);
+app.use('/users', usersRoute);
 // app.use('/bookings', bookingsRoute);
 app.use('/showings', showingsRoute);
+app.use('/signup', accountsRoute);
+app.use('/login', loginRoute);
 
 mongoose
   .connect(mongoDBURL)

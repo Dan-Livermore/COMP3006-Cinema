@@ -1,4 +1,4 @@
-import express from 'express';
+ import express from 'express';
 import {Showing} from '../models/showingsModel.js';
 
 const router = express.Router();
