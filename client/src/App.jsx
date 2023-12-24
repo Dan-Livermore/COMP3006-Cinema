@@ -12,7 +12,7 @@ import BookFilm from "./pages/BookFilm";
 import PageNotFound from "./pages/PageNotFound";
 
 import Account from "./pages/Account";
-import CreateAccount from "./pages/CreateAccount";
+import CreateAccount, { HandleSignUp } from "./pages/CreateAccount";
 import ForgotPassword from "./pages/ForgotPassword";
 import PasswordRequestSent from "./pages/PasswordRequestSent";
 
@@ -43,7 +43,7 @@ const router = createBrowserRouter(
       <Route path="*" element={<PageNotFound />} />
 
       <Route path="/account" element={<Account />} />
-      <Route path="/create-account" element={<CreateAccount />} />
+      <Route path="/create-account" element={<CreateAccount />} action={HandleSignUp} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route path="/password-request-sent" element={<PasswordRequestSent />} />
 
