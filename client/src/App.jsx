@@ -4,7 +4,7 @@ import {
   createRoutesFromElements,
   RouterProvider,
 } from "react-router-dom";
-import Nav from "./Components/Nav";
+import RootLayout from "./structure/RootLayout";
 
 import Home from "./pages/Home";
 import LogIn, { HandleLogIn } from "./pages/LogIn";
@@ -36,7 +36,7 @@ import DeleteShowing from "./pages/mongo/CRUD-showings/DeleteShowing";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route>
+    <Route element={<RootLayout/>}>
       <Route path="/" element={<Home />} />
       <Route path="/book-film" element={<BookFilm />} />
       <Route path="/log-in" element={<LogIn />} action={HandleLogIn}/>
@@ -72,7 +72,6 @@ function App() {
   return (
     <>
       <RouterProvider router={router}>
-      <Nav />
       </RouterProvider>
     </>
   );
