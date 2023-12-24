@@ -72,7 +72,6 @@ function App() {
   return (
     <>
       <RouterProvider router={router}>
-        
       <Nav />
       </RouterProvider>
     </>

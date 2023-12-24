@@ -1,11 +1,13 @@
-import { Link, Form, redirect } from "react-router-dom";
-import axios from 'axios';
+import { Link, Form, redirect, useActionData } from "react-router-dom";
+import axios from "axios";
 import { useState } from "react";
+import $ from "jquery";
 
 const LogIn = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');  
-  
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const data = useActionData();
+
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
@@ -13,28 +15,6 @@ const LogIn = () => {
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
-
-  // const HandleLogIn = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     // Make a POST request to your Express route
-  //     const response = await axios.post('http://localhost:5555/login', {
-  //       email,
-  //       password,
-  //     });
-
-  //     console.log('Response from server:', response.data);
-  //     // Handle the response or update the UI as needed
-  //       if (response.data === "Login successful!"){
-  //         console.log("PLS HELP")
-  //         // useNavigate('/account');
-  //       }
-      
-  //   } catch (error) {
-  //     console.error('Error:', error.response.data);
-  //     // Handle errors if any
-  //   }
-  // };
 
   return (
     <>
@@ -95,15 +75,23 @@ const LogIn = () => {
                 </div>
               </div>
 
+              {data && data.error && (
+                <div
+                  className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+                  role="alert"
+                >
+                  <strong className="font-bold">Error! </strong>
+                  <span className="block sm:inline">{data.error}</span>
+                </div>
+              )}
+
               <div>
-                {/* <Link to="/account"> */}
-                  <button
-                    type="submit"
-                    className="flex w-full justify-center rounded-md bg-sky-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-sky-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600"
-                  >
-                    Sign in
-                  </button>
-                {/* </Link> */}
+                <button
+                  type="submit"
+                  className="flex w-full justify-center rounded-md bg-sky-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-sky-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600"
+                >
+                  Sign in
+                </button>
               </div>
             </Form>
 
@@ -125,32 +113,34 @@ const LogIn = () => {
 
 export default LogIn;
 
-
-export const HandleLogIn = async ({request}) => {
-  
+export const HandleLogIn = async ({ request }) => {
   const data = await request.formData();
 
-    const email= data.get('email')
-    const password= data.get('password')
-  
-  console.log(email, password)
+  const email = data.get("email");
+  const password = data.get("password");
+
+  console.log(email, password);
   try {
     // Make a POST request to your Express route
-    const response = await axios.post('http://localhost:5555/login', {
-      email, 
-      password
+    const response = await axios.post("http://localhost:5555/login", {
+      email,
+      password,
     });
 
-    console.log('Response from server:', response.data);
-    // Handle the response or update the UI as needed
-      if (response.data === "Login successful!"){
-        console.log("PLS HELP")
-        return redirect('/account')
-      }
-    
+    console.log("Response from server:", response.data);
+    if (response.data === "User not found"){
+      return {error: ' User Not Found'}
+    }
+    else if (response.data === "Wrong Password"){
+      return {error: ' Wrong Password'}
+    }
+    else if (response.data === "Login successful!") {
+      return redirect("/account");
+    }
+    else {
+      return {error: ' An Error Has Occurred'}
+    }
   } catch (error) {
-    console.error('Error:', error.response.data);
-    // Handle errors if any
+    console.error("Error:", error.response.data);
   }
-  return null
 };
