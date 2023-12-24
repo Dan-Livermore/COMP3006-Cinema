@@ -1,9 +1,13 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { SnackbarProvider } from "notistack";
+import {
+  createBrowserRouter,
+  Route,
+  createRoutesFromElements,
+  RouterProvider,
+} from "react-router-dom";
 import Nav from "./Components/Nav";
 
 import Home from "./pages/Home";
-import LogIn from "./pages/LogIn";
+import LogIn, { HandleLogIn } from "./pages/LogIn";
 import BookFilm from "./pages/BookFilm";
 import PageNotFound from "./pages/PageNotFound";
 
@@ -30,44 +34,47 @@ import CreateShowing from "./pages/mongo/CRUD-showings/CreateShowing";
 import EditShowing from "./pages/mongo/CRUD-showings/EditShowing";
 import DeleteShowing from "./pages/mongo/CRUD-showings/DeleteShowing";
 
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route>
+      <Route path="/" element={<Home />} />
+      <Route path="/book-film" element={<BookFilm />} />
+      <Route path="/log-in" element={<LogIn />} action={HandleLogIn}/>
+      <Route path="*" element={<PageNotFound />} />
+
+      <Route path="/account" element={<Account />} />
+      <Route path="/create-account" element={<CreateAccount />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
+      <Route path="/password-request-sent" element={<PasswordRequestSent />} />
+
+      <Route path="/bookings" element={<BookingsList />} />
+      <Route path="/booking-details" element={<Bookings />} />
+      <Route path="/update-password" element={<UpdatePassword />} />
+      <Route path="/update-account-details" element={<UpdateAccount />} />
+      <Route path="/delete-account" element={<DeleteAccount />} />
+
+      <Route path="/films" element={<Films />} />
+      <Route path="/films/create" element={<CreateFilm />} />
+      <Route path="/films/details/:id" element={<ReadOneFilm />} />
+      <Route path="/films/edit/:id" element={<EditFilm />} />
+      <Route path="/films/delete/:id" element={<DeleteFilm />} />
+
+      <Route path="/showings" element={<Showings />} />
+      <Route path="/showings/create" element={<CreateShowing />} />
+      <Route path="/showings/details/:id" element={<ReadOneShowing />} />
+      <Route path="/showings/edit/:id" element={<EditShowing />} />
+      <Route path="/showings/delete/:id" element={<DeleteShowing />} />
+    </Route>
+  )
+);
+
 function App() {
   return (
     <>
-      <Router>
-        <SnackbarProvider>
-          <Nav />
-
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/book-film" element={<BookFilm />} />
-            <Route path="/log-in" element={<LogIn />} />
-            <Route path="*" element={<PageNotFound />} />
-
-            <Route path="/account" element={<Account />}/>
-            <Route path="/create-account" element={<CreateAccount />} />
-            <Route path="/forgot-password" element={<ForgotPassword />} />
-            <Route path="/password-request-sent" element={<PasswordRequestSent />} />
-
-            <Route path="/bookings" element={<BookingsList />} />
-            <Route path="/booking-details" element={<Bookings />} />
-            <Route path="/update-password" element={<UpdatePassword />} />
-            <Route path="/update-account-details" element={<UpdateAccount />} />
-            <Route path="/delete-account" element={<DeleteAccount />} />
-
-            <Route path="/films" element={<Films />} />
-            <Route path="/films/create" element={<CreateFilm />} />
-            <Route path="/films/details/:id" element={<ReadOneFilm />} />
-            <Route path="/films/edit/:id" element={<EditFilm />} />
-            <Route path="/films/delete/:id" element={<DeleteFilm />} />
-
-            <Route path="/showings" element={<Showings />} />
-            <Route path="/showings/create" element={<CreateShowing />} />
-            <Route path="/showings/details/:id" element={<ReadOneShowing />} />
-            <Route path="/showings/edit/:id" element={<EditShowing />} />
-            <Route path="/showings/delete/:id" element={<DeleteShowing />} />
-          </Routes>
-        </SnackbarProvider>
-      </Router>
+      <RouterProvider router={router}>
+        
+      <Nav />
+      </RouterProvider>
     </>
   );
 }

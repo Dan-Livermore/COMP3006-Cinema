@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, Form, redirect } from "react-router-dom";
 import axios from 'axios';
 import { useState } from "react";
 
@@ -14,22 +14,27 @@ const LogIn = () => {
     setPassword(e.target.value);
   };
 
-  const HandleLogIn = async (e) => {
-    e.preventDefault();
-    try {
-      // Make a POST request to your Express route
-      const response = await axios.post('http://localhost:5555/login', {
-        email,
-        password,
-      });
+  // const HandleLogIn = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     // Make a POST request to your Express route
+  //     const response = await axios.post('http://localhost:5555/login', {
+  //       email,
+  //       password,
+  //     });
 
-      console.log('Response from server:', response.data);
-      // Handle the response or update the UI as needed
-    } catch (error) {
-      console.error('Error:', error.response.data);
-      // Handle errors if any
-    }
-  };
+  //     console.log('Response from server:', response.data);
+  //     // Handle the response or update the UI as needed
+  //       if (response.data === "Login successful!"){
+  //         console.log("PLS HELP")
+  //         // useNavigate('/account');
+  //       }
+      
+  //   } catch (error) {
+  //     console.error('Error:', error.response.data);
+  //     // Handle errors if any
+  //   }
+  // };
 
   return (
     <>
@@ -42,7 +47,7 @@ const LogIn = () => {
           </div>
 
           <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form className="space-y-6" onSubmit={HandleLogIn}>
+            <Form method="post" action="/log-in" className="space-y-6">
               <div>
                 <label
                   htmlFor="email"
@@ -52,7 +57,6 @@ const LogIn = () => {
                 </label>
                 <div className="mt-2">
                   <input
-                    id="email"
                     name="email"
                     type="email"
                     autoComplete="email"
@@ -82,7 +86,6 @@ const LogIn = () => {
                 </div>
                 <div className="mt-2">
                   <input
-                    id="password"
                     name="password"
                     type="password"
                     onChange={handlePasswordChange}
@@ -102,7 +105,7 @@ const LogIn = () => {
                   </button>
                 {/* </Link> */}
               </div>
-            </form>
+            </Form>
 
             <p className="mt-10 text-center text-sm text-gray-500 pb-12">
               Don't have an account?
@@ -121,3 +124,33 @@ const LogIn = () => {
 };
 
 export default LogIn;
+
+
+export const HandleLogIn = async ({request}) => {
+  
+  const data = await request.formData();
+
+    const email= data.get('email')
+    const password= data.get('password')
+  
+  console.log(email, password)
+  try {
+    // Make a POST request to your Express route
+    const response = await axios.post('http://localhost:5555/login', {
+      email, 
+      password
+    });
+
+    console.log('Response from server:', response.data);
+    // Handle the response or update the UI as needed
+      if (response.data === "Login successful!"){
+        console.log("PLS HELP")
+        return redirect('/account')
+      }
+    
+  } catch (error) {
+    console.error('Error:', error.response.data);
+    // Handle errors if any
+  }
+  return null
+};
