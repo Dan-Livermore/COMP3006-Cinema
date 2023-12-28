@@ -3,7 +3,9 @@ import SeatGrid from '../Components/SeatGrid'
 
 const BookFilm = () => {
   return (
-    <><div>BookFilm</div><SeatGrid /></>
+    <>
+    <SeatGrid />
+    </>
   )
 }
 
