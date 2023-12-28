@@ -1,8 +1,9 @@
 import React from 'react'
+import SeatGrid from '../Components/SeatGrid'
 
 const BookFilm = () => {
   return (
-    <div>BookFilm</div>
+    <><div>BookFilm</div><SeatGrid /></>
   )
 }
 
