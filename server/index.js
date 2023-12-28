@@ -5,7 +5,7 @@ import filmsRoute from "./routes/filmsRoutes.js";
 import usersRoute from "./routes/usersRoutes.js";
 import signupRoute from "./routes/signupRoutes.js";
 import loginRoute from "./routes/loginRoute.js";
-// import bookingRoute from "./routes/bookingRoutes.js";
+import bookingsRoute from "./routes/bookingsRoutes.js";
 import showingsRoute from "./routes/showingsRoutes.js";
 import cors from 'cors';
 
@@ -29,7 +29,7 @@ app.get('/', (request,response) => {
 
 app.use('/films', filmsRoute);
 app.use('/users', usersRoute);
-// app.use('/bookings', bookingsRoute);
+app.use('/bookings', bookingsRoute);
 app.use('/showings', showingsRoute);
 app.use('/signup', signupRoute);
 app.use('/login', loginRoute);
