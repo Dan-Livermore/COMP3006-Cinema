@@ -47,7 +47,6 @@ const FilmInfo = () => {
 
   return (
     <div className='max-w-4xl mx-auto mt-8'>
-      <p className='text-xl text-center mb-4 mt-2'>(1st - 7th January 2024)</p>
       {films.map((film, index) => (
         <Film
           key={film.id}
