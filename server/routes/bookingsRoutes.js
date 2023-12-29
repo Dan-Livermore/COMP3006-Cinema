@@ -1,4 +1,5 @@
 import express from 'express';
+import mongoose from 'mongoose';
 import {Booking} from '../models/bookingModel.js';
 import {Showing} from '../models/showingsModel.js';
 
@@ -38,7 +39,7 @@ router.post('/', async (request, response) => {
       row = 'row4';
     }
 
-    const showing = await Showing.findOne({ _id: mongoose.Types.ObjectId(request.body.showingID) });
+    const showing = await Showing.findOne({ _id: request.body.showingID });
     if (!showing) {
       return response.status(404).send({ message: 'Showing not found' });
     }
@@ -46,6 +47,8 @@ router.post('/', async (request, response) => {
     const showingRow = showing[row].split(',');
     showingRow[parseInt(splitSeat[1]) - 1] = 'Occupied';
     showing[row] = showingRow.join(',');
+
+    showing.seatsRemaining -= 1;
 
     await showing.save();
 
@@ -139,17 +142,55 @@ router.put('/:id', async (request, response) => {
 
 //DELETE
 router.delete('/:id', async (request, response) => {
-  try {
-    const { id } = request.params;
-    const result = await Booking.findByIdAndDelete(id);
-    if (!result) {
-      return response.status(404).json({ message: 'Booking not found' });
-    }
-    return response.status(200).send({ message: 'Booking deleted successfully' });
-  } catch (error) {
-    console.log(error.message);
-    response.status(500).send({ message: error.message });
-  }
-});
+    try {
+        const { id } = request.params;
+    
+        // Find the booking to get showingID and seatNo
+        const booking = await Booking.findById(id);
+        if (!booking) {
+          return response.status(404).json({ message: 'Booking not found' });
+        }
+    
+        const { showingID, seatNo } = booking;
+    
+        // Delete the booking
+        const deletedBooking = await Booking.findByIdAndDelete(id);
+        if (!deletedBooking) {
+          return response.status(404).json({ message: 'Booking not found' });
+        }
+    
+        // Update the seat status in the Showing document
+        const showing = await Showing.findById(showingID);
+        if (!showing) {
+          return response.status(404).json({ message: 'Showing not found' });
+        }
+    
+        const splitSeat = seatNo.split('');
+        let row = '';
+        if (splitSeat[0] === 'A') {
+          row = 'row1';
+        } else if (splitSeat[0] === 'B') {
+          row = 'row2';
+        } else if (splitSeat[0] === 'C') {
+          row = 'row3';
+        } else {
+          row = 'row4';
+        }
+    
+        const showingRow = showing[row].split(',');
+        showingRow[parseInt(splitSeat[1]) - 1] = 'Available';
+        showing[row] = showingRow.join(',');
+
+        showing.seatsRemaining += 1;
+    
+        // Save the updated Showing document
+        await showing.save();
+    
+        return response.status(200).send({ message: 'Booking deleted successfully' });
+      } catch (error) {
+        console.error(error.message);
+        response.status(500).send({ message: error.message });
+      }
+    });
 
 export default router;
