@@ -33,12 +33,13 @@ import ReadOneShowing from "./pages/mongo/CRUD-showings/ReadOneShowing";
 import CreateShowing from "./pages/mongo/CRUD-showings/CreateShowing";
 import EditShowing from "./pages/mongo/CRUD-showings/EditShowing";
 import DeleteShowing from "./pages/mongo/CRUD-showings/DeleteShowing";
+import UserOrGuest from "./pages/UserOrGuest";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route element={<RootLayout/>}>
       <Route path="/" element={<Home />} />
-      <Route path="/book-film" element={<BookFilm />} />
+      <Route path="/book-film" element={<UserOrGuest />} />
       <Route path="/log-in" element={<LogIn />} action={HandleLogIn}/>
       <Route path="*" element={<PageNotFound />} />
 
