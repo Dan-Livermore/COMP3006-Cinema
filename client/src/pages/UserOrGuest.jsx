@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import Login from './LogIn'
+import { redirect } from 'react-router-dom';
 
 const GuestAccess = () => {
-    return null
+    return null;
 }
 const ChooseOption = ({ setLogin }) => {
   return (<div className="flex min-h-full flex-1 justify-center items-center px-6 py-12 lg:px-8 bg-sky-100">

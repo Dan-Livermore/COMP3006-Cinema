@@ -1,9 +1,5 @@
-import React from "react";
-// import ImageSlider from '../Components/ImageSlider'
-import FilmInfo from "../Components/FilmInfo";
+import React from "react"; 
 import FilmsWithShowings from "../Components/FilmsWithShowings";
-import UserOrGuest from "./UserOrGuest";
-
 const addDaySuffix = (day) => {
   if (day >= 11 && day <= 13) {
     return `${day}th`;
@@ -49,7 +45,6 @@ const Home = () => {
       <FilmsWithShowings />
     </div>
   </div>
-  <UserOrGuest/>
   </>
   );
 };

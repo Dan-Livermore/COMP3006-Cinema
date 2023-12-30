@@ -65,6 +65,9 @@ const router = createBrowserRouter(
       <Route path="/showings/details/:id" element={<ReadOneShowing />} />
       <Route path="/showings/edit/:id" element={<EditShowing />} />
       <Route path="/showings/delete/:id" element={<DeleteShowing />} />
+
+      
+      <Route path="/book-seat" element={<BookFilm />} />
     </Route>
   )
 );
