@@ -5,75 +5,31 @@ import axios from "axios";
 
 const Account = () => {
   const [user, setUser] = useState({});
-  const [bookings, setBookings] = useState([]);
-  const [films, setFilms] = useState([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     const token = localStorage.getItem("token");
+    
     if (token) {
       try {
         const id = jwtDecode(token).userId;
-        setLoading(true);
-  
-        Promise.all([
-          axios.get(`http://localhost:5555/users/${id}`),
-          axios.get(`http://localhost:5555/bookings?userId=${id}`),
-          axios.get(`http://localhost:5555/films`),
-        ])
-        .then(([userResponse, bookingsResponse, filmsResponse]) => {
-          setUser(userResponse.data);
-          setBookings(bookingsResponse.data);
-          setFilms(filmsResponse.data);
-  
-          setLoading(false);
-        })
-        .catch((error) => {
-          console.log(error);
-          setLoading(false);
-        });
-        
+        axios.get(`http://localhost:5555/users/${id}`)
+          .then((response) => {
+            setUser(response.data);
+            setLoading(false);
+          })
+          .catch((error) => {
+            console.log(error);
+            setLoading(false);
+          });
       } catch (error) {
         console.error("Error decoding token:", error);
         setLoading(false);
       }
     }
   }, []);
-  
 
-  // Processing logic to match films with bookings based on filmId
-  useEffect(() => {
-    if (bookings.length > 0 && films.length > 0) {
-      const userBookings = bookings.filter(booking => booking.userId === user._id);
-  
-      const updatedBookings = userBookings.map((booking) => {
-        const matchingFilm = films.find((film) => film._id === booking.filmId);
-        return { ...booking, film: matchingFilm };
-      });
-  
-      setBookings(updatedBookings);
-    }
-  }, [bookings, films, user.id]);
-  
-  
-  let upcomingBookingContent = null;
-
-  if (bookings.length === 0) {
-    upcomingBookingContent = <p className="text-center my-6">No upcoming bookings</p>;
-  } else {
-    const firstBooking = bookings[0];
-    if (firstBooking && firstBooking.film) {
-      upcomingBookingContent = (
-        <div className="text-center">
-          <p>Film: {firstBooking.film.title}</p>
-          <img src={firstBooking.film.poster} alt={firstBooking.film.title} className="my-4" />
-          <p>Date: {firstBooking.date}</p>
-        </div>
-      );
-    } else {
-      upcomingBookingContent = <p className="text-center my-6">No film information available for the upcoming booking</p>;
-    }
-  }
 
   const handleLogOut = () => {
     try {
@@ -87,6 +43,7 @@ const Account = () => {
       <div className="flex min-h-full flex-1 flex-col justify-center items-center px-6 py-12 lg:px-8 bg-sky-100">
         <div className="bg-white shadow-md rounded-md p-6 max-w-md w-full mt-1 md:mt-0">
           <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+            {/* Section 1 content */}
             {loading ? (
               <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
                 Loading...
@@ -104,47 +61,36 @@ const Account = () => {
                   type="submit"
                   className="flex w-full justify-center rounded-md bg-sky-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-sky-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600"
                 >
-                  Change Password
+                  Change Email or Password
                 </button>
               </Link>
               <br />
-              <div className="grid grid-cols-2 gap-3">
-                <Link to="/update-account-details">
-                  <button
-                    type="submit"
-                    className="flex w-full justify-center rounded-md bg-sky-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-sky-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600"
-                  >
-                    Update Details
-                  </button>
-                </Link>
-                <Link to="/delete-account">
-                  <button
-                    type="submit"
-                    className="flex w-full justify-center rounded-md bg-red-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
-                  >
-                    Delete Account
-                  </button>
-                </Link>
-              </div>
-              <br />
-            </div>
-
-            <div>
-              <p>
-                <span className="font-bold">Next Film:</span> 
-        {loading ? <p>Loading...</p> : upcomingBookingContent}
-                 {/* [TEMP NAME] [TEMP
-                RATING] <br /> [TEMP BOOKING TIME] */}
-              </p>
-              <Link to="/bookings">
+              <Link to="/delete-account">
                 <button
                   type="submit"
-                  className="flex w-full justify-center rounded-md bg-sky-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-sky-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600"
+                  className="flex w-full justify-center rounded-md bg-red-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
                 >
-                  Manage Bookings
+                  Delete Account
                 </button>
               </Link>
             </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Section 2 */}
+      <div className="flex min-h-full flex-1 flex-col justify-center items-center px-6 py-12 lg:px-8 bg-sky-100">
+        <div className="bg-white shadow-md rounded-md p-6 max-w-md w-full mt-1 md:mt-0">
+          <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+            {/* Section 2 content */}
+            <Link to="/bookings">
+              <button
+                type="submit"
+                className="flex w-full justify-center rounded-md bg-sky-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-sky-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600"
+              >
+                Manage Bookings
+              </button>
+            </Link>
             <br />
             <Link to="/log-in">
               <button
@@ -157,24 +103,29 @@ const Account = () => {
           </div>
         </div>
       </div>
+
+      {/* Section 3 */}
       <div className="flex min-h-full flex-1 flex-col justify-center items-center px-6 py-12 lg:px-8 bg-sky-100">
         <div className="bg-white shadow-md rounded-md p-6 max-w-md w-full mt-1 md:mt-0">
-          <h1 className="text-center text-2xl font-bold">Manage Data</h1>
-          <br />
-          <div className="grid grid-cols-2 gap-4">
-            <div className="flex justify-center items-center">
-              <Link to="/films">
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-40">
-                  Films
-                </button>
-              </Link>
-            </div>
-            <div className="flex justify-center items-center">
-              <Link to="/showings">
-                <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-40">
-                  Showings
-                </button>
-              </Link>
+          <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+            {/* Section 3 content */}
+            <h1 className="text-center text-2xl font-bold">Manage Data</h1>
+            <br />
+            <div className="grid grid-cols-2 gap-4">
+              <div className="flex justify-center items-center">
+                <Link to="/films">
+                  <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-40">
+                    Films
+                  </button>
+                </Link>
+              </div>
+              <div className="flex justify-center items-center">
+                <Link to="/showings">
+                  <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-40">
+                    Showings
+                  </button>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
@@ -182,5 +133,4 @@ const Account = () => {
     </>
   );
 };
-
 export default Account;
