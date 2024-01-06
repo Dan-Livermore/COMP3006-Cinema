@@ -1,27 +1,15 @@
-import { useEffect, redirect} from "react";
+
 import { Link } from "react-router-dom";
 
 const Account = () => {
-  // useEffect(() => {
-  //   // Check user authentication when the Dashboard component mounts
-  //   const checkAuth = async () => {
-  //     try {
-  //       const response = await fetch('/auth/dashboard'); // Endpoint to check authentication on the server
-  //       if (response.ok) {
-  //         // User is authenticated, continue displaying the dashboard
-  //         return;
-  //       } else {
-  //         // User is not authenticated, redirect to login
-  //         redirect("/log-in");; // Redirect to your login page
-  //       }
-  //     } catch (error) {
-  //       console.error('Error checking authentication:', error);
-  //       // Handle error (e.g., show error message, redirect to an error page)
-  //     }
-  //   };
-
-  //   checkAuth();
-  // });
+  const handleLogOut = () => {
+      try{
+        localStorage.removeItem('token');
+      }
+      catch {
+        console.log("Can not Log Out");
+      }
+  }
   return (
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center items-center px-6 py-12 lg:px-8 bg-sky-100">
@@ -79,11 +67,14 @@ const Account = () => {
               </Link>
             </div>
             <br/>
+            <Link to="/log-in">
             <button
+            onClick={handleLogOut}
                   className="flex w-full justify-center rounded-md bg-red-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-600"
                 >
                   Log Out
                 </button>
+                </Link>
           </div>
         </div>
       </div>
