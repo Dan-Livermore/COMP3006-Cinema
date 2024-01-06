@@ -33,11 +33,11 @@ const Nav = () => {
       <ul className="text-center text-xl p-20">
         {/* Links for sections*/}
         {/* ... Other links */}
-        <li className="my-4 py-4 border-b border-sky-500 hover:bg-sky-500 hover:text-zinc-400 hover:rounded cursor-pointer spy={true} smooth={true}">
+        <li className="my-4 py-4 border-b border-sky-500 hover:bg-sky-500 hover:text-zinc-400 hover:rounded cursor-pointer">
           {isLoggedIn ? (
-            <button onClick={handleLogout}>Log Out</button>
+            <button onClick={handleLogout}>Account</button>
           ) : (
-            <Link spy={true} smooth={true} to="/log-in">Log In</Link>
+            <Link to="/log-in">Log In</Link>
           )}
         </li>
       </ul>
@@ -50,8 +50,8 @@ const Nav = () => {
         {/* Logo */}
         <div className="flex items-center flex-1">
           <span className="text-3xl font-bold items-center">
-            <Link spy={true} smooth={true} to="/">
-              <p className="hover:text-zinc-400 transition border-b-0 border-sky-600 hover:border-zinc-400 cursor-pointer inline-block">Cinema Bros</p>
+            <Link to="/">
+              <p className="hover:text-zinc-400 transition border-b-0 border-sky-600 hover:border-zinc-400 cursor-pointer inline-block">Movie Madness</p>
             </Link>
           </span>
         </div>
@@ -61,14 +61,14 @@ const Nav = () => {
           <div className="flex-10">
             <ul className="flex gap-8 mr-0 ml-auto text-[18px]">
               {/* links for sections */}
-              <Link spy={true} smooth={true} to="/book-film">
+              <Link to="/book-film">
                 <li className="hover:text-zinc-400 transition border-b-0 border-sky-600 hover:border-zinc-400 cursor-pointer">Book Film</li>
               </Link>
               <li className="hover:text-zinc-400 transition border-b-0 border-sky-600 hover:border-zinc-400 cursor-pointer">
                 {isLoggedIn ? (
-                  <button onClick={handleLogout}>Log Out</button>
+                  <button onClick={handleLogout}>Account</button>
                 ) : (
-                  <Link spy={true} smooth={true} to="/log-in">Log In</Link>
+                  <Link to="/log-in">Log In</Link>
                 )}
               </li>
             </ul>

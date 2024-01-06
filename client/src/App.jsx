@@ -1,10 +1,12 @@
 import {
   createBrowserRouter,
   Route,
+  Routes,
   createRoutesFromElements,
   RouterProvider,
 } from "react-router-dom";
 import RootLayout from "./structure/RootLayout";
+import PrivateRoutes from "./structure/PrivateRoutes";
 
 import Home from "./pages/Home";
 import LogIn, { HandleLogIn } from "./pages/LogIn";
@@ -37,37 +39,45 @@ import UserOrGuest from "./pages/UserOrGuest";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route element={<RootLayout/>}>
+    <Route element={<RootLayout />}>
       <Route path="/" element={<Home />} />
       <Route path="/book-film" element={<UserOrGuest />} />
-      <Route path="/log-in" element={<LogIn />} action={HandleLogIn}/>
+      <Route path="/log-in" element={<LogIn />} action={HandleLogIn} />
       <Route path="*" element={<PageNotFound />} />
 
-      <Route path="/account" element={<Account />} />
-      <Route path="/create-account" element={<CreateAccount />} action={HandleSignUp} />
-      <Route path="/forgot-password" element={<ForgotPassword />} />
-      <Route path="/password-request-sent" element={<PasswordRequestSent />} />
+        <Route element={<PrivateRoutes />}>
+          <Route path="/account" element={<Account />} />
+          <Route
+            path="/create-account"
+            element={<CreateAccount />}
+            action={HandleSignUp}
+          />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route
+            path="/password-request-sent"
+            element={<PasswordRequestSent />}
+          />
 
-      <Route path="/bookings" element={<BookingsList />} />
-      <Route path="/booking-details" element={<Bookings />} />
-      <Route path="/update-password" element={<UpdatePassword />} />
-      <Route path="/update-account-details" element={<UpdateAccount />} />
-      <Route path="/delete-account" element={<DeleteAccount />} />
+          <Route path="/bookings" element={<BookingsList />} />
+          <Route path="/booking-details" element={<Bookings />} />
+          <Route path="/update-password" element={<UpdatePassword />} />
+          <Route path="/update-account-details" element={<UpdateAccount />} />
+          <Route path="/delete-account" element={<DeleteAccount />} />
 
-      <Route path="/films" element={<Films />} />
-      <Route path="/films/create" element={<CreateFilm />} />
-      <Route path="/films/details/:id" element={<ReadOneFilm />} />
-      <Route path="/films/edit/:id" element={<EditFilm />} />
-      <Route path="/films/delete/:id" element={<DeleteFilm />} />
+          <Route path="/films" element={<Films />} />
+          <Route path="/films/create" element={<CreateFilm />} />
+          <Route path="/films/details/:id" element={<ReadOneFilm />} />
+          <Route path="/films/edit/:id" element={<EditFilm />} />
+          <Route path="/films/delete/:id" element={<DeleteFilm />} />
 
-      <Route path="/showings" element={<Showings />} />
-      <Route path="/showings/create" element={<CreateShowing />} />
-      <Route path="/showings/details/:id" element={<ReadOneShowing />} />
-      <Route path="/showings/edit/:id" element={<EditShowing />} />
-      <Route path="/showings/delete/:id" element={<DeleteShowing />} />
+          <Route path="/showings" element={<Showings />} />
+          <Route path="/showings/create" element={<CreateShowing />} />
+          <Route path="/showings/details/:id" element={<ReadOneShowing />} />
+          <Route path="/showings/edit/:id" element={<EditShowing />} />
+          <Route path="/showings/delete/:id" element={<DeleteShowing />} />
 
-      
-      <Route path="/book-seat" element={<BookFilm />} />
+          <Route path="/book-seat" element={<BookFilm />} />
+        </Route>
     </Route>
   )
 );
@@ -75,7 +85,7 @@ const router = createBrowserRouter(
 function App() {
   return (
     <>
-      <RouterProvider router={router}/>
+      <RouterProvider router={router} />
     </>
   );
 }
