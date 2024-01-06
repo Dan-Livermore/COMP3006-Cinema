@@ -1,7 +1,27 @@
-import React from "react";
+import { useEffect, redirect} from "react";
 import { Link } from "react-router-dom";
 
 const Account = () => {
+  // useEffect(() => {
+  //   // Check user authentication when the Dashboard component mounts
+  //   const checkAuth = async () => {
+  //     try {
+  //       const response = await fetch('/auth/dashboard'); // Endpoint to check authentication on the server
+  //       if (response.ok) {
+  //         // User is authenticated, continue displaying the dashboard
+  //         return;
+  //       } else {
+  //         // User is not authenticated, redirect to login
+  //         redirect("/log-in");; // Redirect to your login page
+  //       }
+  //     } catch (error) {
+  //       console.error('Error checking authentication:', error);
+  //       // Handle error (e.g., show error message, redirect to an error page)
+  //     }
+  //   };
+
+  //   checkAuth();
+  // });
   return (
     <>
       <div className="flex min-h-full flex-1 flex-col justify-center items-center px-6 py-12 lg:px-8 bg-sky-100">

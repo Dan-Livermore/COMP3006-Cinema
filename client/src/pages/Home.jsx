@@ -38,7 +38,7 @@ const Home = () => {
   return (
     <>
     <h1 className="font-bold text-center text-4xl mt-8">Book Now!</h1>
-    <p className="text-xl text-center mb-4 mt-2">{`Week Beginning: ${weekBeginning}`}</p>
+    <p className="text-xl text-center mb-4 mt-2">{`Showings From: ${weekBeginning}`}</p>
     
   <div className="flex flex-col items-center h-screen">
     <div>

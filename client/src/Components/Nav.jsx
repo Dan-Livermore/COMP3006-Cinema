@@ -1,31 +1,49 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaTimes } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
-
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 // Navbar
 const Nav = () => {
-  // To allow dynamic navbar
   const [click, setClick] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    // Check if a token exists in local storage to determine the login status
+    const token = localStorage.getItem("token");
+    if (token) {
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
+    }
+  }, []);
+
   const handleClick = () => setClick(!click);
 
-  // Mobile view
+  const handleLogout = () => {
+    // Clear the token from local storage and update login status
+    localStorage.removeItem("token");
+    setIsLoggedIn(false);
+    // Other logout-related logic if needed
+  };
+
   const content = (
     <div className="lg:hidden block absolute top-16 w-full left-0 right-0 bg-sky-500 transition">
       <ul className="text-center text-xl p-20">
         {/* Links for sections*/}
-        <Link spy={true} smooth={true} to="/book-film">
-          <li className="my-4 py-4 border-b border-sky-500 hover:bg-sky-500 hover:text-zinc-400 hover:rounded cursor-pointer spy={true} smooth={true}">Book Film</li>
-        </Link>
-        <Link spy={true} smooth={true} to="/log-in">
-          <li className="my-4 py-4 border-b border-sky-500 hover:bg-sky-500 hover:text-zinc-400 hover:rounded cursor-pointer spy={true} smooth={true}">Log In</li>
-        </Link>
+        {/* ... Other links */}
+        <li className="my-4 py-4 border-b border-sky-500 hover:bg-sky-500 hover:text-zinc-400 hover:rounded cursor-pointer spy={true} smooth={true}">
+          {isLoggedIn ? (
+            <button onClick={handleLogout}>Log Out</button>
+          ) : (
+            <Link spy={true} smooth={true} to="/log-in">Log In</Link>
+          )}
+        </li>
       </ul>
     </div>
   );
 
-  // Return JSX for the navbar
   return (
     <nav className="bg-sky-600">
       <div className="h-10vh flex justify-between z-50 text-white lg:py-5 px-20 py-4">
@@ -46,9 +64,13 @@ const Nav = () => {
               <Link spy={true} smooth={true} to="/book-film">
                 <li className="hover:text-zinc-400 transition border-b-0 border-sky-600 hover:border-zinc-400 cursor-pointer">Book Film</li>
               </Link>
-              <Link spy={true} smooth={true} to="/log-in">
-                <li className="hover:text-zinc-400 transition border-b-0 border-sky-600 hover:border-zinc-400 cursor-pointer">Log In</li>
-              </Link>
+              <li className="hover:text-zinc-400 transition border-b-0 border-sky-600 hover:border-zinc-400 cursor-pointer">
+                {isLoggedIn ? (
+                  <button onClick={handleLogout}>Log Out</button>
+                ) : (
+                  <Link spy={true} smooth={true} to="/log-in">Log In</Link>
+                )}
+              </li>
             </ul>
           </div>
         </div>
@@ -58,12 +80,11 @@ const Nav = () => {
           {click && content}
         </div>
         <button className="block sm:hidden transition" onClick={handleClick}>
-          {/* Hamburger icons*/}
-          { click ? <FaTimes /> : <GiHamburgerMenu /> }
+          {click ? <FaTimes /> : <GiHamburgerMenu />}
         </button>
       </div>
     </nav>
   );
-}
+};
 
 export default Nav;

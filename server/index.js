@@ -9,8 +9,8 @@ import bookingsRoute from "./routes/bookingsRoutes.js";
 import showingsRoute from "./routes/showingsRoutes.js";
 import cors from 'cors';
 
-// import cookieParser from "cookie-parser";
-// import session from "express-session";
+import cookieParser from "cookie-parser";
+import session from "express-session";
 
 
 const app = express();
@@ -25,17 +25,17 @@ app.use(cors({
   allowedHeaders: ['Content-Type'],
 }));
 
-// app.use(session({
-//   secret: 'your_secret_key_here',
-//   resave: false,
-//   saveUninitialized: false,
-//   // Optional: Configure cookie settings
-//   cookie: {
-//     secure: false, // Set to true if using HTTPS
-//     httpOnly: true, // Cookie not accessible via client-side JavaScript
-//     maxAge: 3600000 // Cookie expiration time in milliseconds (1 hour in this example)
-//   }
-// }));
+app.use(session({
+  secret: 'your_secret_key_here',
+  resave: false,
+  saveUninitialized: false,
+  // Optional: Configure cookie settings
+  cookie: {
+    secure: false, // Set to true if using HTTPS
+    httpOnly: true, // Cookie not accessible via client-side JavaScript
+    maxAge: 3600000 // Cookie expiration time in milliseconds (1 hour in this example)
+  }
+}));
 
 
 app.get('/', (request,response) => {

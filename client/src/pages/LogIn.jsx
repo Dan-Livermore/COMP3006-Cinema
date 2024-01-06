@@ -126,19 +126,17 @@ export const HandleLogIn = async ({ request }) => {
       password,
     });
 
+
     console.log("Response from server:", response.data);
-    if (response.data === "User not found"){
-      return {error: ' User Not Found'}
-    }
-    else if (response.data === "Wrong Password"){
-      return {error: ' Wrong Password'}
-    }
-    else if (response.data === "Login successful!") {
+    if (response.data.token) {
+      // Store the token in local storage or session storage
+      localStorage.setItem("token", response.data.token);
+      // Redirect to account page or perform other actions
       return redirect("/account");
+    } else if (response.data === "User not found") {
+      return { error: 'User Not Found' };
     }
-    else {
-      return {error: ' An Error Has Occurred'}
-    }
+    // ... (other conditions)
   } catch (error) {
     console.error("Error:", error.response.data);
   }
