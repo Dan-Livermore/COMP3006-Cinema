@@ -1,6 +1,80 @@
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
+import axios from "axios";
 
 const Account = () => {
+  const [user, setUser] = useState({});
+  const [bookings, setBookings] = useState([]);
+  const [films, setFilms] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      try {
+        const id = jwtDecode(token).userId;
+        setLoading(true);
+  
+        Promise.all([
+          axios.get(`http://localhost:5555/users/${id}`),
+          axios.get(`http://localhost:5555/bookings?userId=${id}`),
+          axios.get(`http://localhost:5555/films`),
+        ])
+        .then(([userResponse, bookingsResponse, filmsResponse]) => {
+          setUser(userResponse.data);
+          setBookings(bookingsResponse.data);
+          setFilms(filmsResponse.data);
+  
+          setLoading(false);
+        })
+        .catch((error) => {
+          console.log(error);
+          setLoading(false);
+        });
+        
+      } catch (error) {
+        console.error("Error decoding token:", error);
+        setLoading(false);
+      }
+    }
+  }, []);
+  
+
+  // Processing logic to match films with bookings based on filmId
+  useEffect(() => {
+    if (bookings.length > 0 && films.length > 0) {
+      const userBookings = bookings.filter(booking => booking.userId === user._id);
+  
+      const updatedBookings = userBookings.map((booking) => {
+        const matchingFilm = films.find((film) => film._id === booking.filmId);
+        return { ...booking, film: matchingFilm };
+      });
+  
+      setBookings(updatedBookings);
+    }
+  }, [bookings, films, user.id]);
+  
+  
+  let upcomingBookingContent = null;
+
+  if (bookings.length === 0) {
+    upcomingBookingContent = <p className="text-center my-6">No upcoming bookings</p>;
+  } else {
+    const firstBooking = bookings[0];
+    if (firstBooking && firstBooking.film) {
+      upcomingBookingContent = (
+        <div className="text-center">
+          <p>Film: {firstBooking.film.title}</p>
+          <img src={firstBooking.film.poster} alt={firstBooking.film.title} className="my-4" />
+          <p>Date: {firstBooking.date}</p>
+        </div>
+      );
+    } else {
+      upcomingBookingContent = <p className="text-center my-6">No film information available for the upcoming booking</p>;
+    }
+  }
+
   const handleLogOut = () => {
     try {
       localStorage.removeItem("token");
@@ -13,18 +87,17 @@ const Account = () => {
       <div className="flex min-h-full flex-1 flex-col justify-center items-center px-6 py-12 lg:px-8 bg-sky-100">
         <div className="bg-white shadow-md rounded-md p-6 max-w-md w-full mt-1 md:mt-0">
           <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-            <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-              [TEMP]'s Account
-            </h2>
+            {loading ? (
+              <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+                Loading...
+              </h2>
+            ) : (
+              <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+                {user.email}'s Account
+              </h2>
+            )}
 
             <div>
-              <br />
-              <p>
-                <span className="font-bold">Username:</span> [TEMP]
-              </p>
-              <p>
-                <span className="font-bold">Email:</span> [TEMP]
-              </p>
               <br />
               <Link to="/update-password">
                 <button
@@ -58,10 +131,11 @@ const Account = () => {
 
             <div>
               <p>
-                <span className="font-bold">Next Film:</span> [TEMP NAME] [TEMP
-                RATING] <br /> [TEMP BOOKING TIME]
+                <span className="font-bold">Next Film:</span> 
+        {loading ? <p>Loading...</p> : upcomingBookingContent}
+                 {/* [TEMP NAME] [TEMP
+                RATING] <br /> [TEMP BOOKING TIME] */}
               </p>
-              <img alt="[TEMP]"></img>
               <Link to="/bookings">
                 <button
                   type="submit"
@@ -84,27 +158,27 @@ const Account = () => {
         </div>
       </div>
       <div className="flex min-h-full flex-1 flex-col justify-center items-center px-6 py-12 lg:px-8 bg-sky-100">
-  <div className="bg-white shadow-md rounded-md p-6 max-w-md w-full mt-1 md:mt-0">
-    <h1 className="text-center text-2xl font-bold">Manage Data</h1>
-    <div className="grid grid-cols-2 gap-4">
-      <div className="flex justify-center items-center">
-        <Link to="/films">
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-40">
-            Films
-          </button>
-        </Link>
+        <div className="bg-white shadow-md rounded-md p-6 max-w-md w-full mt-1 md:mt-0">
+          <h1 className="text-center text-2xl font-bold">Manage Data</h1>
+          <br />
+          <div className="grid grid-cols-2 gap-4">
+            <div className="flex justify-center items-center">
+              <Link to="/films">
+                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-40">
+                  Films
+                </button>
+              </Link>
+            </div>
+            <div className="flex justify-center items-center">
+              <Link to="/showings">
+                <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-40">
+                  Showings
+                </button>
+              </Link>
+            </div>
+          </div>
+        </div>
       </div>
-      <div className="flex justify-center items-center">
-        <Link to="/showings">
-          <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded w-40">
-            Showings
-          </button>
-        </Link>
-      </div>
-    </div>
-  </div>
-</div>
-
     </>
   );
 };
