@@ -8,10 +8,10 @@ import { useSnackbar } from "notistack";
 const CreateShowing = () => {
   const [filmID, setFilmID] = useState("");
   const [startTime, setStartTime] = useState("");
-  const [row1, setRow1] = useState("");
-  const [row2, setRow2] = useState("");
-  const [row3, setRow3] = useState("");
-  const [row4, setRow4] = useState("");
+  const [row1, setRow1] = useState("Available,Available,Available,Aisle,Available,Available,Available,Available");
+  const [row2, setRow2] = useState("Available,Available,Available,Aisle,Available,Available,Available,Available");
+  const [row3, setRow3] = useState("Available,Available,Available,Aisle,Available,Available,Available,Available");
+  const [row4, setRow4] = useState("Available,Available,Available,Aisle,Available,Available,Available,Available");
   const [totalSeats, setTotalSeats] = useState(28);
   const [seatsRemaining, setSeatsRemaining] = useState(28);
   const [loading, setLoading] = useState(false);

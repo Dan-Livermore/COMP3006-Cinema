@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
-import Spinner from "../Components/Spinner";
+import Spinner from "../../Components/Spinner";
 import { Link } from "react-router-dom";
 import { AiOutlineEdit } from "react-icons/ai";
 import { BsInfoCircle } from "react-icons/bs";
 import { MdOutlineDelete } from "react-icons/md";
 
-const BookingList = () => {
+const Booking = () => {
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(false);
   const [users, setUsers] = useState([]);
@@ -209,4 +209,4 @@ const BookingList = () => {
   );
 };
 
-export default BookingList;
+export default Booking;

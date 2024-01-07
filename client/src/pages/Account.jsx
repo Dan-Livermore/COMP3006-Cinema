@@ -43,7 +43,6 @@ const Account = () => {
       <div className="flex min-h-full flex-1 flex-col justify-center items-center px-6 py-12 lg:px-8 bg-sky-100">
         <div className="bg-white shadow-md rounded-md p-6 max-w-md w-full mt-1 md:mt-0">
           <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-            {/* Section 1 content */}
             {loading ? (
               <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
                 Loading...
@@ -78,11 +77,9 @@ const Account = () => {
         </div>
       </div>
 
-      {/* Section 2 */}
       <div className="flex min-h-full flex-1 flex-col justify-center items-center px-6 py-12 lg:px-8 bg-sky-100">
         <div className="bg-white shadow-md rounded-md p-6 max-w-md w-full mt-1 md:mt-0">
           <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-            {/* Section 2 content */}
             <Link to="/bookings">
               <button
                 type="submit"
@@ -104,11 +101,9 @@ const Account = () => {
         </div>
       </div>
 
-      {/* Section 3 */}
       <div className="flex min-h-full flex-1 flex-col justify-center items-center px-6 py-12 lg:px-8 bg-sky-100">
         <div className="bg-white shadow-md rounded-md p-6 max-w-md w-full mt-1 md:mt-0">
           <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-            {/* Section 3 content */}
             <h1 className="text-center text-2xl font-bold">Manage Data</h1>
             <br />
             <div className="grid grid-cols-2 gap-4">
