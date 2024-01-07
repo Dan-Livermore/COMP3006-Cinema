@@ -66,85 +66,91 @@ const Showings = () => {
     const minutes = date.getMinutes(); 
     return `${day}/${month}/${year} ${hours < 10 ? '0' + hours : hours}:${minutes < 10 ? '0' + minutes : minutes}`;
   }
-
-  return (
-    <div className="p-4">
-      <div className="flex justify-between items-center">
-        <h1 className="text-3xl my-8">Showings List</h1>
-        <Link to="/showings/create">
-          <button className="bg-sky-600 text-white rounded-lg w-40 h-10 4xl">
-            Add Showing
-          </button>
-        </Link>
+ 
+    return (
+      <div className="p-4">
+        <div className="flex justify-between items-center">
+          <h1 className="text-3xl my-8">Showings List</h1>
+          <Link to="/showings/create">
+            <button className="bg-sky-600 text-white rounded-lg w-40 h-10 4xl">
+              Add Showing
+            </button>
+          </Link>
+        </div>
+        {loading ? (
+          <Spinner />
+        ) : (
+          <>
+            {formattedShowings.length === 0 ? (
+              <p>No data in the database</p>
+            ) : (
+              <table className="w-full  border-spacing-2">
+                <thead>
+                  <tr>
+                    <th className="border border-slate-600 rounded-md">No</th>
+                    <th className="border border-slate-600 rounded-md">Film ID</th>
+                    <th className="border border-slate-600 rounded-md">Film Name</th>
+                    <th className="border border-slate-600 rounded-md max-md:hidden">
+                      Start Time
+                    </th>
+                    <th className="border border-slate-600 rounded-md max-md:hidden">
+                      Total Seats
+                    </th>
+                    <th className="border border-slate-600 rounded-md max-md:hidden">
+                      Remaining Seats
+                    </th>
+                    <th className="border border-slate-600 rounded-md max-md:hidden">
+                      Seats (Array)
+                    </th>
+                    <th className="border border-slate-600 rounded-md">Options</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {formattedShowings.map((showing, index) => (
+                    <tr key={showing.showingID} className="h-8">
+                      <td className="border border-slate-700 rounded-md text-center">
+                        {index + 1}
+                      </td>
+                      <td className="border border-slate-700 rounded-md text-center">
+                        {showing.filmID}
+                      </td>
+                      <td className="border border-slate-700 rounded-md text-center">
+                        {showing.filmTitle}
+                      </td>
+                      <td className="border border-slate-700 rounded-md text-center max-md:hidden">
+                        {showing.formattedDate}
+                      </td>
+                      <td className="border border-slate-700 rounded-md text-center max-md:hidden">
+                        {showing.totalSeats}
+                      </td>
+                      <td className="border border-slate-700 rounded-md text-center max-md:hidden">
+                        {showing.seatsRemaining}
+                      </td>
+                      <td className="border border-slate-700 rounded-md text-center max-md:hidden">
+                        {`${showing.row1}\n${showing.row2}\n${showing.row3}\n${showing.row4}`}
+                      </td>
+                      <td className="border border-slate-700 rounded-md text-center max-md:hidden">
+                        <div className="flex justify-center gap-x-4">
+                          <Link to={`/showings/details/${showing._id}`}>
+                            <BsInfoCircle className="text-2xl text-green-800" />
+                          </Link>
+                          <Link to={`/showings/edit/${showing._id}`}>
+                            <AiOutlineEdit className="text-2xl text-yellow-600" />
+                          </Link>
+                          <Link to={`/showings/delete/${showing._id}`}>
+                            <MdOutlineDelete className="text-2xl text-red-600" />
+                          </Link>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
+          </>
+        )}
       </div>
-      {loading ? (
-        <Spinner />
-      ) : (
-        <table className="w-full  border-spacing-2">
-          <thead>
-            <tr>
-              <th className="border border-slate-600 rounded-md">No</th>
-              <th className="border border-slate-600 rounded-md">Film ID</th>
-              <th className="border border-slate-600 rounded-md">Film Name</th>
-              <th className="border border-slate-600 rounded-md max-md:hidden">
-                Start Time
-              </th>
-              <th className="border border-slate-600 rounded-md max-md:hidden">
-                Total Seats
-              </th>
-              <th className="border border-slate-600 rounded-md max-md:hidden">
-                Remaining Seats
-              </th>
-              <th className="border border-slate-600 rounded-md max-md:hidden">
-                Seats (Array)
-              </th>
-              <th className="border border-slate-600 rounded-md">Options</th>
-            </tr>
-          </thead>
-          <tbody>
-            {formattedShowings.map((showing) => (
-              <tr key={showing.showingID} className="h-8">
-                <td className="border border-slate-700 rounded-md text-center">
-                  {showing.index}
-                </td>
-                <td className="border border-slate-700 rounded-md text-center">
-                  {showing.filmID}
-                </td>
-                <td className="border border-slate-700 rounded-md text-center">
-                  {showing.filmTitle}
-                </td>
-                <td className="border border-slate-700 rounded-md text-center max-md:hidden">
-                  {showing.formattedDate}
-                </td>
-                <td className="border border-slate-700 rounded-md text-center max-md:hidden">
-                  {showing.totalSeats}
-                </td>
-                <td className="border border-slate-700 rounded-md text-center max-md:hidden">
-                  {showing.seatsRemaining}
-                </td>
-                <td className="border border-slate-700 rounded-md text-center max-md:hidden">
-                  {`${showing.row1}\n${showing.row2}\n${showing.row3}\n${showing.row4}`}
-                </td>
-                <td className="border border-slate-700 rounded-md text-center max-md:hidden">
-                  <div className="flex justify-center gap-x-4">
-                    <Link to={`/showings/details/${showing._id}`}>
-                      <BsInfoCircle className="text-2xl text-green-800" />
-                    </Link>
-                    <Link to={`/showings/edit/${showing._id}`}>
-                      <AiOutlineEdit className="text-2xl text-yellow-600" />
-                    </Link>
-                    <Link to={`/showings/delete/${showing._id}`}>
-                      <MdOutlineDelete className="text-2xl text-red-600" />
-                    </Link>
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      )}
-    </div>
-  );
-};
-
-export default Showings;
+    );
+  };
+  export default Showings;
+  
