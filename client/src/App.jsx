@@ -67,7 +67,7 @@ const router = createBrowserRouter(
           <Route path="/bookings/delete/:id" element={<DeleteBooking />} />
 
 
-          <Route path="/update-password" element={<UpdatePassword />} />
+          <Route path="/update-password/:id" element={<UpdatePassword />} />
           <Route path="/update-account/:id" element={<UpdateAccount />} />
           <Route path="/delete-account" element={<DeleteAccount />} />
 
