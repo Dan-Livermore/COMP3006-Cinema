@@ -45,7 +45,9 @@ router.put('/:id', async (request, response) => {
     }
     const { id } = request.params;
     
+    if (request.body.password.length >40){
     request.body.password = await bcrypt.hash(request.body.password, 13);
+    }
 
     const result = await User.findByIdAndUpdate(id, request.body);
 

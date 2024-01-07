@@ -16,15 +16,15 @@ import Account from "./pages/Account";
 import CreateAccount, { HandleSignUp } from "./pages/CreateAccount";
 import ForgotPassword from "./pages/ForgotPassword";
 import PasswordRequestSent from "./pages/PasswordRequestSent";
+import UpdatePassword from "./pages/mongo/CRUD-accounts/UpdatePassword";
+import UpdateAccount from "./pages/mongo/CRUD-accounts/UpdateAccount";
+import DeleteAccount from "./pages/mongo/CRUD-accounts/DeleteAccount";
 
 import Bookings from "./pages/mongo/Bookings.jsx";
 import ReadOneBooking from "./pages/mongo/CRUD-bookings/ReadOneBooking.jsx";
 import EditBooking from "./pages/mongo/CRUD-bookings/EditBooking.jsx";
 import DeleteBooking from "./pages/mongo/CRUD-bookings/DeleteBooking.jsx";
 
-import UpdatePassword from "./pages/UpdatePassword";
-import UpdateAccount from "./pages/UpdateAccount";
-import DeleteAccount from "./pages/DeleteAccount";
 
 import Films from "./pages/mongo/Films";
 import ReadOneFilm from "./pages/mongo/CRUD-films/ReadOneFilm";
@@ -68,7 +68,7 @@ const router = createBrowserRouter(
 
 
           <Route path="/update-password" element={<UpdatePassword />} />
-          <Route path="/update-account-details" element={<UpdateAccount />} />
+          <Route path="/update-account/:id" element={<UpdateAccount />} />
           <Route path="/delete-account" element={<DeleteAccount />} />
 
           <Route path="/Films" element={<Films />} />
