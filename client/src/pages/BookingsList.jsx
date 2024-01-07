@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 import Spinner from "../Components/Spinner";
 import { Link } from "react-router-dom";
 import { AiOutlineEdit } from "react-icons/ai";
@@ -12,19 +13,49 @@ const BookingList = () => {
   const [users, setUsers] = useState([]);
   const [showings, setShowings] = useState([]);
   const [films, setFilms] = useState([]);
+  const [user, setUser] = useState({});
 
   useEffect(() => {
     setLoading(true);
-    axios
-      .get("http://localhost:5555/bookings")
-      .then((response) => {
-        setBookings(response.data.data);
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      try {
+        const id = jwtDecode(token).userId;
+        axios
+          .get(`http://localhost:5555/users/${id}`)
+          .then((response) => {
+            setUser(response.data);
+            setLoading(false);
+
+            // Fetch only the bookings created by the user corresponding to the token
+            axios
+              .get(`http://localhost:5555/bookings?userID=${id}`)
+              .then((response) => {        
+                const allBookings = response.data.data;
+
+                // Filter bookings for the current user
+                const filteredBookings = allBookings.filter(booking => booking.userID === id);
+        
+                setBookings(filteredBookings);
+              
+                // setBookings(response.data.data);
+                setLoading(false);
+              })
+              .catch((error) => {
+                console.log(error);
+                setLoading(false);
+              });
+          })
+          .catch((error) => {
+            console.log(error);
+            setLoading(false);
+          });
+      } catch (error) {
+        console.error("Error decoding token:", error);
         setLoading(false);
-      })
-      .catch((error) => {
-        console.log(error);
-        setLoading(false);
-      });
+      }
+    }
 
     axios
       .get("http://localhost:5555/showings")
@@ -71,7 +102,11 @@ const BookingList = () => {
   return (
     <div className="p-4">
       <div className="flex justify-between items-center">
-        <h1 className="text-3xl my-8">Bookings List</h1>
+        {loading ? (
+          <h1 className="text-xl my-8">Loading...</h1>
+        ) : (
+          <h1 className="text-xl my-8">{user.email}'s Bookings</h1>
+        )}
         <Link to="/bookings/create">
           <button className="bg-sky-600 text-white rounded-lg w-40 h-10 4xl">
             Add booking
@@ -113,8 +148,8 @@ const BookingList = () => {
                       {getUserEmail(booking.userID)}
                     </td>
                     <td className="border border-slate-700 rounded-md text-center">
-              {getFilmTitle(booking.showingID)}
-            </td>
+                      {getFilmTitle(booking.showingID)}
+                    </td>
                     <td className="border border-slate-700 rounded-md text-center max-md:hidden">
                       {booking.seatNo}
                     </td>
