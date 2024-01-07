@@ -30,7 +30,7 @@ const BookingList = () => {
 
             // Fetch only the bookings created by the user corresponding to the token
             axios
-              .get(`http://localhost:5555/bookings?userID=${id}`)
+              .get(`http://localhost:5555/bookings`)
               .then((response) => {        
                 const allBookings = response.data.data;
 
@@ -38,8 +38,6 @@ const BookingList = () => {
                 const filteredBookings = allBookings.filter(booking => booking.userID === id);
         
                 setBookings(filteredBookings);
-              
-                // setBookings(response.data.data);
                 setLoading(false);
               })
               .catch((error) => {
@@ -59,8 +57,13 @@ const BookingList = () => {
 
     axios
       .get("http://localhost:5555/showings")
-      .then((response) => {
-        setShowings(response.data.data);
+      .then((showingsResponse) => {
+        const sortedShowings = showingsResponse.data.data.sort((a, b) => {
+          const dateA = new Date(a.startTime);
+          const dateB = new Date(b.startTime);
+          return dateB - dateA; // Sorts in descending order by start time
+        });
+        setShowings(sortedShowings);
       })
       .catch((error) => {
         console.log(error);
@@ -85,9 +88,13 @@ const BookingList = () => {
       });
   }, []);
 
-  const getUserEmail = (userID) => {
-    const user = users.find((user) => user._id === userID);
-    return user ? user.email : "N/A";
+  const getFilmPoster = (showingID) => {
+    const showing = showings.find((showing) => showing._id === showingID);
+    if (showing) {
+      const film = films.find((film) => film._id === showing.filmID);
+      return film ? film.poster : "N/A";
+    }
+    return "N/A";
   };
 
   const getFilmTitle = (showingID) => {
@@ -98,6 +105,25 @@ const BookingList = () => {
     }
     return "N/A";
   };
+
+  const getStartTime = (showingID) => {
+    const showing = showings.find((showing) => showing._id === showingID);
+    if (showing) {
+      return showing ? formatDate(showing.startTime) : "01/01/2000"
+    }
+    return "N/A";
+  };
+
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const year = date.getFullYear();
+    
+    const hours = date.getHours(); 
+    const minutes = date.getMinutes(); 
+    return `${day}/${month}/${year} ${hours < 10 ? '0' + hours : hours}:${minutes < 10 ? '0' + minutes : minutes}`;
+  }
 
   return (
     <div className="p-4">
@@ -125,10 +151,13 @@ const BookingList = () => {
                 <tr>
                   <th className="border border-slate-600 rounded-md">No</th>
                   <th className="border border-slate-600 rounded-md">
-                    User ID
+                    Poster
                   </th>
                   <th className="border border-slate-600 rounded-md max-md:hidden">
-                    Showing ID
+                    Film Name
+                  </th>
+                  <th className="border border-slate-600 rounded-md max-md:hidden">
+                    Start Time
                   </th>
                   <th className="border border-slate-600 rounded-md max-md:hidden">
                     Seat Number
@@ -145,10 +174,13 @@ const BookingList = () => {
                       {index + 1}
                     </td>
                     <td className="border border-slate-700 rounded-md text-center">
-                      {getUserEmail(booking.userID)}
+                    <img src={getFilmPoster(booking.showingID)} alt="Movie Poster" />
                     </td>
                     <td className="border border-slate-700 rounded-md text-center">
                       {getFilmTitle(booking.showingID)}
+                    </td>
+                    <td className="border border-slate-700 rounded-md text-center max-md:hidden">
+                      {getStartTime(booking.showingID)}
                     </td>
                     <td className="border border-slate-700 rounded-md text-center max-md:hidden">
                       {booking.seatNo}
