@@ -1,12 +1,47 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ChairIcon from "@mui/icons-material/Chair";
+import io from "socket.io-client"
 
 const DynamicTable = ({ data }) => {
   const [selectedSeat, setSelectedSeat] = useState(null);
+  const [seatAvailability, setSeatAvailability] = useState(data);
+  const socket = io('http://localhost:3002')
+
+  useEffect(() => {
+    socket.on("RecieveSeat", ({ rowIndex, cellIndex }) => {
+      console.log("Received", { rowIndex, cellIndex });
+
+      // Update the seatAvailability array to mark it as "Occupied"
+      const updatedSeats = [...seatAvailability];
+      updatedSeats[rowIndex][cellIndex] = "Occupied";
+      setSeatAvailability(updatedSeats);
+
+      // If the received seat matches the currently selected seat, clear the selected seat locally
+      if (selectedSeat && selectedSeat.rowIndex === rowIndex && selectedSeat.cellIndex === cellIndex) {
+        setSelectedSeat(null);
+      }
+    });
+  }, [socket, seatAvailability, selectedSeat]);
 
   const selectSeat = (rowIndex, cellIndex, status) => {
-    if (status === 'Available' || (selectedSeat && selectedSeat.rowIndex === rowIndex && selectedSeat.cellIndex === cellIndex)) {
-      setSelectedSeat(selectedSeat && selectedSeat.rowIndex === rowIndex && selectedSeat.cellIndex === cellIndex ? null : { rowIndex, cellIndex });
+    if (status === "Available") {
+      socket.emit("SeatSelected", { rowIndex, cellIndex });
+    }
+
+    if (
+      status === "Available" ||
+      (selectedSeat &&
+        selectedSeat.rowIndex === rowIndex &&
+        selectedSeat.cellIndex === cellIndex)
+    ) {
+      setSelectedSeat(
+        selectedSeat &&
+          selectedSeat.rowIndex === rowIndex &&
+          selectedSeat.cellIndex === cellIndex
+          ? null
+          : { rowIndex, cellIndex }
+      );
+      console.log(selectedSeat);
     }
   };
 
@@ -14,9 +49,11 @@ const DynamicTable = ({ data }) => {
   const colNumbs = "123 4567890";
 
   const rowLabels =
-    data.length > 0 ? Array.from(rowLetters).slice(0, data.length) : [];
-  const columnLabels = data[0]
-    ? Array.from(colNumbs).slice(0, data[0].length)
+    seatAvailability.length > 0
+      ? Array.from(rowLetters).slice(0, seatAvailability.length)
+      : [];
+  const columnLabels = seatAvailability[0]
+    ? Array.from(colNumbs).slice(0, seatAvailability[0].length)
     : [];
 
   const displaySeat = (status, rowIndex, cellIndex) => {
@@ -32,16 +69,18 @@ const DynamicTable = ({ data }) => {
         </div>
       );
     } else if (status === "Available") {
-      className = "bg-red-500 text-white";
+      if (
+        selectedSeat &&
+        selectedSeat.rowIndex === rowIndex &&
+        selectedSeat.cellIndex === cellIndex
+      ) {
+        className = "bg-green-500";
+      } else {
+        className = "bg-red-500";
+      }
       return (
         <div
-          className={`p-2 rounded-lg border border-gray-300 m-1 ${className} ${
-            selectedSeat &&
-            selectedSeat.rowIndex === rowIndex &&
-            selectedSeat.cellIndex === cellIndex
-              ? "bg-green-500"
-              : ""
-          }`}
+          className={`p-2 rounded-lg border border-gray-300 m-1 text-white ${className}`}
         >
           <ChairIcon />{" "}
           {selectedSeat &&
@@ -85,13 +124,15 @@ const DynamicTable = ({ data }) => {
             </tr>
           </thead>
           <tbody>
-            {data.map((row, rowIndex) => (
+            {seatAvailability.map((row, rowIndex) => (
               <tr key={rowIndex}>
                 <td className="font-bold">{rowLabels[rowIndex]}</td>
                 {row.map((cell, cellIndex) => (
                   <td key={cellIndex}>
                     <button
-                      onClick={() => selectSeat(rowIndex, cellIndex, cell)}
+                      onClick={() =>
+                        selectSeat(rowIndex, cellIndex, cell)
+                      }
                     >
                       {displaySeat(cell, rowIndex, cellIndex)}
                     </button>
