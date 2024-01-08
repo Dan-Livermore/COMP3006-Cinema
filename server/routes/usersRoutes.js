@@ -45,7 +45,7 @@ router.put('/:id', async (request, response) => {
     const { id } = request.params;
     const { email, password } = request.body;
 
-    if (request.body.password.length < 40) {
+    if (request.body.password.length < 20) {
       // Hash the new password
       request.body.password = await bcrypt.hash(password, 13);
     }

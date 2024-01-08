@@ -18,7 +18,7 @@ const DeleteFilm = () => {
       .then(() => {
         setLoading(false);
         enqueueSnackbar('Film Deleted Successfully', { variant: 'success' });
-        navigate(-1);
+        navigate("/log-in");
       })
       .catch((error) => {
         setLoading(false);

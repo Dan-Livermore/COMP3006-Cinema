@@ -69,7 +69,7 @@ const router = createBrowserRouter(
 
           <Route path="/update-password/:id" element={<UpdatePassword />} />
           <Route path="/update-account/:id" element={<UpdateAccount />} />
-          <Route path="/delete-account" element={<DeleteAccount />} />
+          <Route path="/delete-account/:id" element={<DeleteAccount />} />
 
           <Route path="/Films" element={<Films />} />
           <Route path="/Films/create" element={<CreateFilm />} />
