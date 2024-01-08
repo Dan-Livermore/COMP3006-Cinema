@@ -126,7 +126,6 @@ export const HandleLogIn = async ({ request }) => {
       password,
     });
 
-
     console.log("Response from server:", response.data);
     if (response.data.token) {
       // Store the token in local storage or session storage
@@ -140,4 +139,7 @@ export const HandleLogIn = async ({ request }) => {
   } catch (error) {
     console.error("Error:", error.response.data);
   }
+
+  // Add a default return statement if none of the conditions above are met
+  return null;
 };

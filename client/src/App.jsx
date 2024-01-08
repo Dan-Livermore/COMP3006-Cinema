@@ -38,23 +38,23 @@ import CreateShowing from "./pages/mongo/CRUD-showings/CreateShowing";
 import EditShowing from "./pages/mongo/CRUD-showings/EditShowing";
 import DeleteShowing from "./pages/mongo/CRUD-showings/DeleteShowing";
 
-import UserOrGuest from "./pages/UserOrGuest";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route element={<RootLayout />}>
       <Route path="/" element={<Home />} />
-      <Route path="/book-film" element={<UserOrGuest />} />
+      <Route path="/book-film" element={<BookFilm />} />
       <Route path="/log-in" element={<LogIn />} action={HandleLogIn} />
       <Route path="*" element={<PageNotFound />} />
-
-        <Route element={<PrivateRoutes />}>
-          <Route path="/account" element={<Account />} />
-          <Route
+      
+      <Route
             path="/create-account"
             element={<CreateAccount />}
             action={HandleSignUp}
           />
+
+        <Route element={<PrivateRoutes />}>
+          <Route path="/account" element={<Account />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route
             path="/password-request-sent"
@@ -67,9 +67,9 @@ const router = createBrowserRouter(
           <Route path="/bookings/delete/:id" element={<DeleteBooking />} />
 
 
-          <Route path="/update-password" element={<UpdatePassword />} />
+          <Route path="/update-password/:id" element={<UpdatePassword />} />
           <Route path="/update-account/:id" element={<UpdateAccount />} />
-          <Route path="/delete-account" element={<DeleteAccount />} />
+          <Route path="/delete-account/:id" element={<DeleteAccount />} />
 
           <Route path="/Films" element={<Films />} />
           <Route path="/Films/create" element={<CreateFilm />} />
