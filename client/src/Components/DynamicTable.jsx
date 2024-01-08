@@ -1,50 +1,70 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import ChairIcon from "@mui/icons-material/Chair";
 import io from "socket.io-client"
 
 const DynamicTable = ({ data }) => {
   const [selectedSeat, setSelectedSeat] = useState(null);
   const [seatAvailability, setSeatAvailability] = useState(data);
-  const socket = io('http://localhost:3002')
+  const socket = useMemo(() => io('http://localhost:3002'), []);
 
   useEffect(() => {
-    socket.on("RecieveSeat", ({ rowIndex, cellIndex }) => {
+    const handleRecieveSeat = ({ rowIndex, cellIndex }) => {
       console.log("Received", { rowIndex, cellIndex });
 
-      // Update the seatAvailability array to mark it as "Occupied"
       const updatedSeats = [...seatAvailability];
       updatedSeats[rowIndex][cellIndex] = "Occupied";
       setSeatAvailability(updatedSeats);
 
-      // If the received seat matches the currently selected seat, clear the selected seat locally
       if (selectedSeat && selectedSeat.rowIndex === rowIndex && selectedSeat.cellIndex === cellIndex) {
         setSelectedSeat(null);
       }
-    });
+    };
+
+    socket.on("RecieveSeat", handleRecieveSeat);
+
+    return () => {
+      socket.off("RecieveSeat", handleRecieveSeat);
+    };
   }, [socket, seatAvailability, selectedSeat]);
 
   const selectSeat = (rowIndex, cellIndex, status) => {
-    if (status === "Available") {
-      socket.emit("SeatSelected", { rowIndex, cellIndex });
+    const newStatus = status === "Available" ? "Selected" : "Available";
+    let emitStatus = newStatus;
+  
+    if (status === "Selected") {
+      emitStatus = "Available";
+      socket.emit("SeatOccupied", { rowIndex, cellIndex, status: "Occupied" });
+    } else {
+      socket.emit("SeatSelected", { rowIndex, cellIndex, status: newStatus });
     }
-
-    if (
-      status === "Available" ||
+  
+    const updatedSelectedSeat =
       (selectedSeat &&
         selectedSeat.rowIndex === rowIndex &&
         selectedSeat.cellIndex === cellIndex)
-    ) {
-      setSelectedSeat(
-        selectedSeat &&
-          selectedSeat.rowIndex === rowIndex &&
-          selectedSeat.cellIndex === cellIndex
-          ? null
-          : { rowIndex, cellIndex }
-      );
-      console.log(selectedSeat);
+        ? null
+        : { rowIndex, cellIndex };
+  
+    setSelectedSeat(updatedSelectedSeat);
+  
+    if (status === "Selected") {
+      const updatedStatus = displaySeat("Available", rowIndex, cellIndex);
+      if (updatedStatus && updatedStatus.props && updatedStatus.props.children && updatedStatus.props.children.includes("Selected")) {
+        socket.emit("SeatSelected", {
+          rowIndex,
+          cellIndex,
+          status: "Selected",
+        });
+      } else {
+        socket.emit("SeatSelected", {
+          rowIndex,
+          cellIndex,
+          status: "Available",
+        });
+      }
     }
   };
-
+  
   const rowLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   const colNumbs = "123 4567890";
 

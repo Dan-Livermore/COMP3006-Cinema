@@ -46,14 +46,15 @@ const router = createBrowserRouter(
       <Route path="/book-film" element={<BookFilm />} />
       <Route path="/log-in" element={<LogIn />} action={HandleLogIn} />
       <Route path="*" element={<PageNotFound />} />
-
-        <Route element={<PrivateRoutes />}>
-          <Route path="/account" element={<Account />} />
-          <Route
+      
+      <Route
             path="/create-account"
             element={<CreateAccount />}
             action={HandleSignUp}
           />
+
+        <Route element={<PrivateRoutes />}>
+          <Route path="/account" element={<Account />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route
             path="/password-request-sent"

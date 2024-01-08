@@ -62,13 +62,13 @@ mongoose.connect(mongoDBURL)
 
     io.on("connection", (socket) => {
       console.log(`User Connected: ${socket.id}`);
-
+    
       socket.on("SeatSelected", (data) => {
         socket.broadcast.emit("RecieveSeat", data);
-      })
-
+      });
+    
       socket.on("disconnect", () => {
-        console.log("User disconnected");
+        console.log(`User disconnected: ${socket.id}`);
       });
     });
 
