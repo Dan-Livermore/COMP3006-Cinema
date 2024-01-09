@@ -10,6 +10,8 @@ import loginRoute from "./routes/loginRoute.js";
 import bookingsRoute from "./routes/bookingsRoutes.js";
 import showingsRoute from "./routes/showingsRoutes.js";
 import cors from "cors";
+import http from "http";
+import { Server } from "socket.io";
 
 const app = express();
 
@@ -35,13 +37,6 @@ app.use("/bookings", bookingsRoute);
 app.use("/showings", showingsRoute);
 app.use("/signup", signupRoute);
 app.use("/login", loginRoute);
-
-
-
-    // Socket.io setup
-    import http from "http";
-    import { Server } from "socket.io";
-
 
 mongoose.connect(mongoDBURL)
   .then(() => {

@@ -7,6 +7,34 @@ const DynamicTable = ({ data }) => {
   const [seatAvailability, setSeatAvailability] = useState(data);
   const socket = useMemo(() => io('http://localhost:3002'), []);
 
+  const handleBookSeat = () => {
+    if (selectedSeat) {
+  
+      const selectedRowLetter = rowLabels[selectedSeat.rowIndex];
+      const rowInteger = rowLetters.indexOf(selectedRowLetter) + 1; // Adding 1 because index starts from 0
+  
+      let colInteger = parseInt(columnLabels[selectedSeat.cellIndex], 10) - 1;
+      if (colInteger > 2){
+        colInteger += 1;
+      }
+
+      if (!colInteger){
+        console.log("No Seat Selected")
+      }
+      else {
+      console.log("Selected Seat:", {
+        row: rowInteger,
+        col: colInteger,
+      });
+    }
+  
+      
+    } else {
+      console.log("No seat selected to book");
+      // Notify the user to select a seat before booking
+    }
+  };
+
   useEffect(() => {
     const handleRecieveSeat = ({ rowIndex, cellIndex }) => {
       console.log("Received", { rowIndex, cellIndex });
@@ -125,13 +153,15 @@ const DynamicTable = ({ data }) => {
   };
 
   const selectedSeatText =
-    selectedSeat !== null
-      ? `Selected Seat: ${rowLabels[selectedSeat.rowIndex]}${
-          columnLabels[selectedSeat.cellIndex]
-        }`
-      : "No seat selected";
+  selectedSeat !== null &&
+  selectedSeat.cellIndex !== 3 // Check if the selection is not in the 4th column
+    ? `Selected Seat: ${rowLabels[selectedSeat.rowIndex]}${
+        columnLabels[selectedSeat.cellIndex]
+      }`
+    : "No seat selected";
 
   return (
+    <>
     <div>
       <div className="flex justify-center">
         <table className="mt-10">
@@ -168,6 +198,13 @@ const DynamicTable = ({ data }) => {
         <p className="mt-10 text-lg">{selectedSeatText}</p>
       </div>
     </div>
+    <div className='flex min-h-full flex-1 justify-center items-center px-6 py-12 lg:px-8'>
+      <br/>
+      <button className='bg-blue-500 hover:bg-blue-700 text-white text-4xl font-bold py-4 w-80 h-30 px-4 rounded-lg' 
+      onClick={handleBookSeat}>
+        Book Seat</button>
+    </div>
+    </>
   );
 };
 

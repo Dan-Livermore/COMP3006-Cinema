@@ -10,6 +10,7 @@ import PrivateRoutes from "./structure/PrivateRoutes";
 import Home from "./pages/Home";
 import LogIn, { HandleLogIn } from "./pages/LogIn";
 import BookFilm from "./pages/BookFilm";
+import SelectFilm from "./pages/SelectFilm";
 import PageNotFound from "./pages/PageNotFound";
 
 import Account from "./pages/Account";
@@ -43,7 +44,7 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route element={<RootLayout />}>
       <Route path="/" element={<Home />} />
-      <Route path="/book-film" element={<BookFilm />} />
+      <Route path="/book-film/:id" element={<BookFilm />} />
       <Route path="/log-in" element={<LogIn />} action={HandleLogIn} />
       <Route path="*" element={<PageNotFound />} />
       
