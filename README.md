@@ -1,21 +1,27 @@
 # 3006 Full Stack Application
 ## Cinema Booking System
 
-For only films starring Ryan Gosling
+A cinema booking website written using MERN (MongoDB, Express.js, React.js, Node.js) technologies.
 
-Cinema Booking Website - MERN Stack Project
-Description
-This project is a Cinema Booking Website developed using the MERN (MongoDB, Express.js, React.js, Node.js) stack. It allows users to browse movies, check showtimes, and book tickets for their preferred shows.
+### Features
+1. Upcoming movie listings are displayed for any stored showing after the current date.
+2. Film infomration - film name, director, release date, age rating, runtime, a description and a poster.
+3. Account system - including bcrypt password authentication where users can access and edit their information and information about their upcoming film bookings.
+4. Showings & bookings are available and seats are able to be booked by users.
+5. Authenticated users can perform all CRUD operations on films, showings, bookings and account collections
 
-Features
-User Authentication: Users can sign up, log in, and manage their profiles.
-Movie Listings: Display of current movies with details like synopsis, genre, and ratings.
-Showtimes and Booking: Users can view available showtimes and book tickets for desired shows.
-Admin Panel: Admins can manage movies, showtimes, and user bookings.
-Responsive Design: The website is optimized for various devices.
-Technologies Used
-Frontend: React.js, HTML, CSS, Tailwind
+### Technologies Used
+Frontend: React.js, JQuery HTML, CSS, Tailwind
 Backend: Node.js, Express.js
 Database: MongoDB
-Authentication: JSON Web Tokens (JWT)
-Other Libraries/Tools: Redux (optional for state management), Axios (for API calls)
+Web Sockets: Socket.io 
+
+Other Libraries/Tools: 
+- Cors
+- Axios
+- Nodemon
+- Mongoose
+- Material UI Icons
+-  JSON Web Tokens (JWT)
+
+![example workflow](https://github.com/Dan-Livermore/3006-Cinema/actions/workflows/main.yml/badge.svg)

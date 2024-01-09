@@ -26,7 +26,7 @@ import EditBooking from "./pages/mongo/CRUD-bookings/EditBooking.jsx";
 import DeleteBooking from "./pages/mongo/CRUD-bookings/DeleteBooking.jsx";
 
 
-import Films from "./pages/mongo/Films";
+import Films from "./pages/mongo/films";
 import ReadOneFilm from "./pages/mongo/CRUD-films/ReadOneFilm";
 import CreateFilm from "./pages/mongo/CRUD-films/CreateFilm";
 import EditFilm from "./pages/mongo/CRUD-films/EditFilm";
@@ -71,11 +71,11 @@ const router = createBrowserRouter(
           <Route path="/update-account/:id" element={<UpdateAccount />} />
           <Route path="/delete-account/:id" element={<DeleteAccount />} />
 
-          <Route path="/Films" element={<Films />} />
-          <Route path="/Films/create" element={<CreateFilm />} />
-          <Route path="/Films/details/:id" element={<ReadOneFilm />} />
-          <Route path="/Films/edit/:id" element={<EditFilm />} />
-          <Route path="/Films/delete/:id" element={<DeleteFilm />} />
+          <Route path="/films" element={<Films />} />
+          <Route path="/films/create" element={<CreateFilm />} />
+          <Route path="/films/details/:id" element={<ReadOneFilm />} />
+          <Route path="/films/edit/:id" element={<EditFilm />} />
+          <Route path="/films/delete/:id" element={<DeleteFilm />} />
 
           <Route path="/showings" element={<Showings />} />
           <Route path="/showings/create" element={<CreateShowing />} />
