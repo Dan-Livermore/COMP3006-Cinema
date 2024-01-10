@@ -1,0 +1,33 @@
+name: Node Tests
+
+on:
+  push:
+    branches:
+      - main
+      - chai
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    env:
+      MONGODB_URI: ${{ secrets.MONGODB_URL }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Set MongoDB connection string
+        run: echo "export MONGODB_URI='${{ secrets.MONGODB_URI }}'" >> $GITHUB_ENV
+        shell: bash
+
+      - name: Run tests
+        run: npm test
