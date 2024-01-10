@@ -1,4 +1,4 @@
-name: Tests
+name: Node Tests
 
 on:
   push:
@@ -10,17 +10,24 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    env:
+      MONGODB_URI: ${{ secrets.MONGODB_URL }}
+
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Use Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '20.x'
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 14
 
-    - name: Install dependencies
-      run: npm install
+      - name: Install dependencies
+        run: npm install
 
-    - name: Run tests
-      run: npm test
+      - name: Set MongoDB connection string
+        run: echo "export MONGODB_URI='${{ secrets.MONGODB_URI }}'" >> $GITHUB_ENV
+        shell: bash
+
+      - name: Run tests
+        run: npm test
