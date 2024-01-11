@@ -1,8 +1,8 @@
 # 3006 Full Stack Application
-## Cinema Booking System
+## Cinema Booking System 
+![Workflow Output](https://github.com/Dan-Livermore/COMP3006-Cinema/actions/workflows/test.yml/badge.svg)
 
 A cinema booking website written using MERN (MongoDB, Express.js, React.js, Node.js) technologies.
-![Workflow Output](https://github.com/Dan-Livermore/COMP3006-Cinema/actions/workflows/test.yml/badge.svg)
 
 ### Features
 1. Upcoming movie listings are displayed for any stored showing after the current date.
