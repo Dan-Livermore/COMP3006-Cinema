@@ -2,6 +2,7 @@
 ## Cinema Booking System
 
 A cinema booking website written using MERN (MongoDB, Express.js, React.js, Node.js) technologies.
+![Workflow Output](https://github.com/Dan-Livermore/COMP3006-Cinema/actions/workflows/main.yml/badge.svg)
 
 ### Features
 1. Upcoming movie listings are displayed for any stored showing after the current date.
@@ -15,14 +16,15 @@ Frontend: React.js, JQuery HTML, CSS, Tailwind <br>
 Backend: Node.js, Express.js <br> 
 Database: MongoDB <br>
 Web Sockets: Socket.io  <br>
+Automated Testing: Chai, Mocha, SuperTest <br>
 
-Other Libraries/Tools: 
+### Other Libraries/Tools: 
 - Cors
 - Axios
 - Bcrypt
 - Nodemon
 - Mongoose
 - Material UI Icons
--  JSON Web Tokens (JWT)
+- JSON Web Tokens (JWT)
 
-![example workflow](https://github.com/Dan-Livermore/3006-Cinema/actions/workflows/main.yml/badge.svg)
+Developed in Visual Studio Code with Docker & Postman.
