@@ -12,11 +12,11 @@ A cinema booking website written using MERN (MongoDB, Express.js, React.js, Node
 5. Authenticated users can perform all CRUD operations on films, showings, bookings and account collections
 
 ### Technologies Used 
-Frontend: React.js, JQuery HTML, CSS, Tailwind <br>
-Backend: Node.js, Express.js <br> 
-Database: MongoDB <br>
-Web Sockets: Socket.io  <br>
-Automated Testing: Chai, Mocha, SuperTest <br>
+__Frontend:__ React.js, JQuery HTML, CSS, Tailwind <br>
+__Backend:__ Node.js, Express.js <br> 
+__Database:__ MongoDB <br>
+__Web Sockets:__ Socket.io  <br>
+__Automated Testing:__ Chai, Mocha, Supertest <br>
 
 ### Other Libraries/Tools: 
 - Cors

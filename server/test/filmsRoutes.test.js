@@ -1,4 +1,4 @@
-import { expect } from "chai";
+import { expect} from "chai";
 import supertest from "supertest";
 import app from "../index.js";
 
@@ -23,22 +23,6 @@ describe("Films Routes", () => {
         expect(res.body).to.be.an("object");
       });
   });
-  // it("Get One - Drive", () => {
-  //   return request
-  //     .get("/films/6583347eed59946e06f53065")
-  //     .expect(200)
-  //     .expect("Content-Type", /json/)
-  //     .then((res) => {
-  //       expect(res.body).to.be.an("object");
-  //       expect(res.body.title).to.equal("Drive");
-  //       expect(res.body.director).to.equal("Nicholas Winding Refn");
-  //       expect(res.body.releaseDate).to.equal("2011-08-11T12:00:00.000Z");
-  //       expect(res.body.ageRating).to.equal("15");
-  //       expect(res.body.runtime).to.equal(100);
-  //       expect(res.body.description).to.equal("A getaway driver falls in love with Irene, a criminal's wife. He gets involved in a robbery attempt and lands himself in trouble with the mob to protect his lover.");
-  //       expect(res.body.poster).to.equal("https://upload.wikimedia.org/wikipedia/en/1/13/Drive2011Poster.jpg");
-  //     });
-  // });
   it("Get One - ID = Blade Runner 2049", () => {
     return request
     .get("/films/6583347eed59946e06f53065")
@@ -157,82 +141,6 @@ it("Create Film - runtime is a string", () => {
     });
 });
 
-// it("Create Film - runtime is a decimal", () => {
-//   const newFilmData = {
-//     title: "New Film",
-//     director: "New Director",
-//     releaseDate: "2023-01-01T00:00:00.000Z",
-//     ageRating: "New Rating",
-//     runtime: 2.5, 
-//     description: "New Description",
-//     poster: "New Image Link",
-//   };
-
-//   return request
-//     .post("/films")
-//     .send(newFilmData)
-//     .expect(400) 
-//     .expect("Content-Type", /json/)
-//     .then((res) => {
-//       expect(res.body).to.be.an('object');
-//       expect(res.body.error).to.equal("Invalid runtime format");
-//     });
-// });
-
-// let filmId;  // Declare filmId at a higher scope
-
-// before((done) => {
-//   // Create a film
-//   const newFilmData = {
-//     title: "New Film",
-//     director: "New Director",
-//     releaseDate: "2023-01-01T00:00:00.000Z",
-//     ageRating: "New Rating",
-//     runtime: 100,
-//     description: "New Description",
-//     poster: "New Image Link"
-//   };
-
-//   request
-//     .post("/films")
-//     .send(newFilmData)
-//     .expect(201)
-//     .expect("Content-Type", /json/)
-//     .end((err, res) => {
-//       if (err) return done(err);
-//       filmId = res.body._id;
-//       done();
-//     });
-// });
-
-// it("Update Film", (done) => {
-//   // Update the film
-//   const updatedFilmData = {
-//     title: "Updated Film",
-//     director: "Updated Director",
-//     releaseDate: "2023-02-01T00:00:00.000Z",
-//     ageRating: "Updated Rating",
-//     runtime: 120,
-//     description: "Updated Description",
-//     poster: "Updated Image Link"
-//   };
-
-//   request
-//     .put(`/films/${filmId}`)
-//     .send(updatedFilmData)
-//     .expect(200)
-//     .expect("Content-Type", /json/)
-//     .end((err, updateRes) => {
-//       if (err) return done(err);
-//       console.log('Response Body:', updateRes.body);
-//       // Validate the response body or specific fields if needed
-//       expect(updateRes.body.title).to.equal(updatedFilmData.title);
-//       expect(updateRes.body.director).to.equal(updatedFilmData.director);
-//       // Add assertions for other fields
-//       done();
-//     });
-// });
-
 it("Delete an existing film", () => {
   const newFilmData = {
     title: "New Film",
@@ -253,5 +161,67 @@ it("Delete an existing film", () => {
       return request
         .delete(`/films/${createRes.body._id}`)
         .expect(200); 
+    });
+});
+
+let filmId;
+
+before((done) => {
+  const newFilmData = {
+    title: 'New Film',
+    director: 'New Director',
+    releaseDate: '2023-01-01T00:00:00.000Z',
+    ageRating: 'New Rating',
+    runtime: 100,
+    description: 'New Description',
+    poster: 'New Image Link',
+  };
+
+  request
+    .post('/films')
+    .send(newFilmData)
+    .expect(201)
+    .expect('Content-Type', /json/)
+    .end((err, res) => {
+      if (err) return done(err);
+      filmId = res.body._id;
+      done();
+    });
+});
+
+it('Update Film', (done) => {
+  const updatedFilmData = {
+    title: 'Updated Film',
+    director: 'Updated Director',
+    releaseDate: '2023-02-01T00:00:00.000Z',
+    ageRating: 'Updated Rating',
+    runtime: 120,
+    description: 'Updated Description',
+    poster: 'Updated Image Link',
+  };
+
+  request
+    .put(`/films/${filmId}`)
+    .send(updatedFilmData)
+    .expect(200)
+    .expect('Content-Type', /json/)
+    .end(() => {
+      request
+        .get(`/films/${filmId}`)
+        .expect(200)
+        .expect('Content-Type', /json/)
+        .expect((getRes) => {
+          expect(getRes.body.title).to.equal(updatedFilmData.title);
+          expect(getRes.body.director).to.equal(updatedFilmData.director);
+          expect(getRes.body.releaseDate).to.equal(updatedFilmData.releaseDate);
+          expect(getRes.body.ageRating).to.equal(updatedFilmData.ageRating);
+          expect(getRes.body.runtime).to.equal(updatedFilmData.runtime);
+          expect(getRes.body.description).to.equal(updatedFilmData.description);
+          expect(getRes.body.poster).to.equal(updatedFilmData.poster);
+        })
+        .end((getErr) => {
+          if (getErr) return done(getErr);
+          done(); 
+        });
     });
 });
