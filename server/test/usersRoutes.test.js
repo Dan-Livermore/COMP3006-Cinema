@@ -6,6 +6,14 @@ const request = supertest(app);
 
 describe("Users Routes", () => {
   let server;
+  it("Get is valid request", () => {
+    return request
+      .get("/films")
+      .expect(200)
+      .then((res) => {
+        expect(res.body).to.be.an("object");
+      });
+  });
   it("Get all Users", () => {
     return request
       .get("/users")

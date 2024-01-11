@@ -6,6 +6,15 @@ const request = supertest(app);
 
 describe("Bookings Routes", () => {
   let server;
+  it("Get is valid request", () => {
+    return request
+      .get("/bookings")
+      .expect(200)
+      .then((res) => {
+        expect(res.body).to.be.an("object");
+      });
+  });
+
   it("Get all Bookings", () => {
     return request
       .get("/bookings")
@@ -15,4 +24,5 @@ describe("Bookings Routes", () => {
         expect(res.body).to.be.an("object");
       });
   });
+
 });
