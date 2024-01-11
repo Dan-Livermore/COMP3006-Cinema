@@ -1,10 +1,10 @@
-name: Node Tests
+name: Mongo Tests
 
 on:
   push:
     branches:
       - main
-      - chai
+      - ChaiTesting
 
 jobs:
   test:
