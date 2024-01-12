@@ -2,9 +2,7 @@ import { useState, useEffect } from "react";
 import { FaTimes } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { Link } from "react-router-dom";
-import axios from "axios";
 
-// Navbar
 const Nav = () => {
   const [click, setClick] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -19,10 +17,10 @@ const Nav = () => {
       }
     };
 
-    // Initial check when the component mounts
+    // Initial check
     checkTokenStatus();
 
-    // Polling interval (every half second in this case)
+    // Polls every half second
     const interval = setInterval(() => {
       checkTokenStatus();
     }, 500); // 500 milliseconds = 0.5 seconds
@@ -34,16 +32,17 @@ const Nav = () => {
   const handleClick = () => setClick(!click);
 
   const content = (
-    <div className="lg:hidden block absolute top-16 w-full left-0 right-0 bg-sky-500 transition">
+    <div className="lg:hidden block absolute top-16 w-full left-0 right-0 bg-sky-500 transition" data-testid="mobile-menu">
       <ul className="text-center text-xl p-20">
         <li className="my-4 py-4 border-b border-sky-500 hover:bg-sky-500 hover:text-zinc-400 hover:rounded cursor-pointer">
-          <Link to="/account">
+          <Link to="/account" data-testid="account-link">
             {isLoggedIn ? <button>Account</button> : <button>Log In</button>}
           </Link>
         </li>
       </ul>
     </div>
   );
+  
 
   return (
     <nav className="bg-sky-600">
@@ -51,7 +50,7 @@ const Nav = () => {
         {/* Logo */}
         <div className="flex items-center flex-1">
           <span className="text-3xl font-bold items-center">
-            <Link to="/">
+            <Link to="/" aria-label="logo-link">
               <p className="hover:text-zinc-400 transition border-b-0 border-sky-600 hover:border-zinc-400 cursor-pointer inline-block">
                 Movie Madness
               </p>
@@ -64,7 +63,7 @@ const Nav = () => {
           <div className="flex-10">
             <ul className="flex gap-8 mr-0 ml-auto text-[18px]">
               <li className="hover:text-zinc-400 transition border-b-0 border-sky-600 hover:border-zinc-400 cursor-pointer">
-                <Link to="/account">
+                <Link to="/account" aria-label="account-link-desktop">
                   {isLoggedIn ? (
                     <button>Account</button>
                   ) : (
@@ -77,8 +76,12 @@ const Nav = () => {
         </div>
 
         {/* Mobile burger */}
-        <div>{click && content}</div>
-        <button className="block sm:hidden transition" onClick={handleClick}>
+        <div aria-label="mobile-burger-content">{click && content}</div>
+        <button
+          className="block sm:hidden transition"
+          onClick={handleClick}
+          aria-label="toggle navigation"
+        >
           {click ? <FaTimes /> : <GiHamburgerMenu />}
         </button>
       </div>
