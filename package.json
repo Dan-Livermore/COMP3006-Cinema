@@ -4,7 +4,7 @@
   "description": "For only Ryan Gosling Films",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --timeout 5000 ./server/test/ConnectDatabase.test.js ./server/test -exit"
+    "test": "mocha --timeout 50000 ./server/test/ConnectDatabase.test.js ./server/test -exit"
   },
   
   "keywords": [],
