@@ -21,8 +21,16 @@ router.post("/", async (req, res) => {
     const account = await User.create(newAccount);
     return res.send('Account Created!');
   } catch (error) {
-    res.status(500).send({ message: error.message });
+    if (error.name === 'ValidationError') {
+      return res.status(400).send({
+        message: "Validation failed",
+        errors: error.errors,
+      });
+    }
+    console.error(error); // Log the error for debugging
+    res.status(500).send({ message: "Internal Server Error" });
   }
-});  
+});
+
 
 export default router;
