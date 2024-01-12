@@ -92,9 +92,23 @@ const FilmsWithShowings = () => {
     return `${dayName} ${formattedDay} ${monthName} ${year} \n ${formattedTime}`;
   }
 
-  const handleBooking = (filmID) => {
-    navigate(`/book-film/${filmID}`);
-  };
+  const handleBooking = (filmID, startTime) => {
+
+  const foundShowing = showings.find(
+    (showing) => showing.filmID === filmID && showing.startTime === startTime
+  );
+
+  if (foundShowing) {
+    // Do something with the found showing, such as navigating or displaying information
+    console.log('Found Showing:', foundShowing);
+    // Example navigation
+    navigate(`/book-film/${foundShowing._id}`);
+  } else {
+    console.log('Showing not found');
+    // Handle not found scenario
+  }
+};
+ 
 
   const today = new Date();
 
@@ -109,11 +123,12 @@ const FilmsWithShowings = () => {
       ...filmDetails,
     };
   });
-
+  
   return (
     <>
       <div className="flex items-center mb-8">
         <div className="w-2/3">
+
           {upcomingShowingsWithFilms.map((showing) => (
             <div key={showing.startTime} className="flex items-center mb-4">
               <div className="w-1/3 mr-4">
@@ -134,8 +149,9 @@ const FilmsWithShowings = () => {
                 <br />
                 <button
                   className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-4 px-6 rounded-lg mr-3"
-                  onClick={() => handleBooking(showing.filmID)}
-                >
+                  onClick={() => {
+                    handleBooking(showing.filmID, showing.startTime);
+                  }}>
                   {formatDateForShowing(showing.startTime)}
                 </button>
                 <hr className="my-8 border-t border-gray-300" />

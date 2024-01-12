@@ -22,6 +22,7 @@ import UpdateAccount from "./pages/mongo/CRUD-accounts/UpdateAccount";
 import DeleteAccount from "./pages/mongo/CRUD-accounts/DeleteAccount";
 
 import Bookings from "./pages/mongo/Bookings.jsx";
+import BookingSuccess from "./pages/mongo/CRUD-bookings/BookingSuccess.jsx";
 import ReadOneBooking from "./pages/mongo/CRUD-bookings/ReadOneBooking.jsx";
 import EditBooking from "./pages/mongo/CRUD-bookings/EditBooking.jsx";
 import DeleteBooking from "./pages/mongo/CRUD-bookings/DeleteBooking.jsx";
@@ -63,6 +64,7 @@ const router = createBrowserRouter(
           />
 
           <Route path="/bookings" element={<Bookings />} />
+          <Route path="/booking-success/:id" element={<BookingSuccess />} />
           <Route path="/bookings/details/:id" element={<ReadOneBooking />} />
           <Route path="/bookings/edit/:id" element={<EditBooking />} />
           <Route path="/bookings/delete/:id" element={<DeleteBooking />} />
