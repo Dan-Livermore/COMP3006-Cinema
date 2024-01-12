@@ -19,10 +19,8 @@ router.post("/", async (req, res) => {
     };
 
     const account = await User.create(newAccount);
-    console.log(account);
     return res.send('Account Created!');
   } catch (error) {
-    console.log(error.message);
     res.status(500).send({ message: error.message });
   }
 });  

@@ -33,11 +33,9 @@ router.post('/', async (request, response) => {
     };
 
     const showing = await Showing.create(newShowing);
-    console.log(showing);
 
     return response.status(201).send(showing);
   } catch (error) {
-    console.log(error.message);
     response.status(500).send({ message: error.message });
   }
 });
@@ -52,7 +50,6 @@ router.get('/', async (request, response) => {
       data: showings,
     });
   } catch (error) {
-    console.log(error.message);
     response.status(500).send({ message: error.message });
   }
 });
@@ -66,7 +63,6 @@ router.get('/:id', async (request, response) => {
 
     return response.status(200).json(showing);
   } catch (error) {
-    console.log(error.message);
     response.status(500).send({ message: error.message });
   }
 });
@@ -98,7 +94,6 @@ router.put('/:id', async (request, response) => {
     }
     return response.status(200).send({ message: 'Showing updated successfully' });
   } catch (error) {
-    console.log(error.message);
     response.status(500).send({ message: error.message });
   }
 });
@@ -113,7 +108,6 @@ router.delete('/:id', async (request, response) => {
     }
     return response.status(200).send({ message: 'Showing deleted successfully' });
   } catch (error) {
-    console.log(error.message);
     response.status(500).send({ message: error.message });
   }
 });

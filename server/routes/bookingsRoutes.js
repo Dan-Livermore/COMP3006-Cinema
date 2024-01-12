@@ -25,7 +25,6 @@ router.post('/', async (request, response) => {
     };
 
     const booking = await Booking.create(newBooking);
-    console.log(booking);
 
     const splitSeat = newBooking.seatNo.split('');
     let row = '';
@@ -54,7 +53,6 @@ router.post('/', async (request, response) => {
 
     return response.status(201).send(booking);
   } catch (error) {
-    console.log(error.message);
     response.status(500).send({ message: error.message });
   }
 });
@@ -69,7 +67,6 @@ router.get('/', async (request, response) => {
       data: bookings,
     });
   } catch (error) {
-    console.log(error.message);
     response.status(500).send({ message: error.message });
   }
 });
@@ -83,7 +80,6 @@ router.get('/:id', async (request, response) => {
 
     return response.status(200).json(booking);
   } catch (error) {
-    console.log(error.message);
     response.status(500).send({ message: error.message });
   }
 });
@@ -130,12 +126,10 @@ router.put('/:id', async (request, response) => {
         showingRow[parseInt(splitSeat[1]) - 1] = 'Occupied';
         showing[row] = showingRow.join(',');
     
-        // Save the updated showing
         await showing.save();
     
         return response.status(200).send({ message: 'Booking and Showing updated successfully' });
       } catch (error) {
-        console.log(error.message);
         response.status(500).send({ message: error.message });
       }
     });
@@ -188,7 +182,6 @@ router.delete('/:id', async (request, response) => {
     
         return response.status(200).send({ message: 'Booking deleted successfully' });
       } catch (error) {
-        console.error(error.message);
         response.status(500).send({ message: error.message });
       }
     });

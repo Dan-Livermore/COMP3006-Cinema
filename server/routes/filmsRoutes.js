@@ -31,11 +31,9 @@ router.post('/', async (request, response) => {
     };
 
     const film = await Film.create(newFilm);
-    console.log(film);
 
     return response.status(201).send(film);
   } catch (error) {
-    console.log(error.message);
     response.status(500).send({ message: error.message });
   }
 });
@@ -50,7 +48,6 @@ router.get('/', async (request, response) => {
       data: films,
     });
   } catch (error) {
-    console.log(error.message);
     response.status(500).send({ message: error.message });
   }
 });
@@ -64,7 +61,6 @@ router.get('/:id', async (request, response) => {
 
     return response.status(200).json(film);
   } catch (error) {
-    console.log(error.message);
     response.status(500).send({ message: error.message });
   }
 });
@@ -95,7 +91,6 @@ router.put('/:id', async (request, response) => {
     }
     return response.status(200).send({ message: 'Film updated successfully' });
   } catch (error) {
-    console.log(error.message);
     response.status(500).send({ message: error.message });
   }
 });
@@ -110,7 +105,6 @@ router.delete('/:id', async (request, response) => {
     }
     return response.status(200).send({ message: 'Film deleted successfully' });
   } catch (error) {
-    console.log(error.message);
     response.status(500).send({ message: error.message });
   }
 });

@@ -26,7 +26,6 @@ router.post("/", async (req, res) => {
 
     res.status(200).json({ token }); // Send the token to the client
   } catch (error) {
-    console.error("Error:", error);
     res.status(500).send("An Error Has Occurred");
   }
 });
