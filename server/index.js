@@ -38,10 +38,10 @@ app.use("/login", loginRoute);
 
 mongoose.connect(mongoDBURL)
   .then(() => {
-    console.log("App connected to database");
+    // console.log("App connected to database");
 
     const server = app.listen(PORT, () => {
-      console.log(`App is listening on port ${PORT}`);
+      // console.log(`App is listening on port ${PORT}`);
     });
 
 
@@ -66,7 +66,7 @@ mongoose.connect(mongoDBURL)
     });
 
     httpServer.listen(SOCKETPORT, () => {
-      console.log(`Sockets listening on ${SOCKETPORT}`);
+      // console.log(`Sockets listening on ${SOCKETPORT}`);
     });
   })
   .catch((error) => {
