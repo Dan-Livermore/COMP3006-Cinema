@@ -28,3 +28,5 @@ __Automated Testing:__ Chai, Mocha, Supertest <br>
 - JSON Web Tokens (JWT)
 
 Developed in Visual Studio Code with Docker & Postman.
+
+__Link to demonstration video:__ https://youtu.be/DzmKksPk8nU
