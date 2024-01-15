@@ -30,11 +30,15 @@ __Automated Testing:__ Chai, Mocha, Supertest <br>
 ## How To Use:
 Using Node Packet Manager (NPM)
 1. Go To Server Directory __*cd server*__
-2. Install bcrypt __*npm install bcrypt -save*__ (Despite updating package.json, docker files and package.json lock, it stil needs to be reinstalled)
-2. Run __*npm start*__
-3. Open Client Directory __*cd ../ client*__
-2. Install react-scripts __*npm install react-scripts -save*__ (Despite updating package.json, docker files and package.json lock, it stil needs to be reinstalled)
-4. Run __*npm start*__
+2. Install bcrypt __*npm install bcrypt -save*__ 
+3. Run __*npm start*__
+4. Open Client Directory __*cd ../ client*__
+5. Install react-scripts __*npm install react-scripts -save*__
+6. Run __*npm start*__
+(Despite updating package.json, docker files and package.json lock, it still needs to be reinstalled)
+Developed in Visual Studio Code with Docker & Postman.
+
+__Link to demonstration video:__ https://youtu.be/DzmKksPk8nU
 
 Developed in Visual Studio Code with Docker & Postman.
 
