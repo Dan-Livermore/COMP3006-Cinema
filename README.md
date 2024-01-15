@@ -27,6 +27,13 @@ __Automated Testing:__ Chai, Mocha, Supertest <br>
 - Material UI Icons
 - JSON Web Tokens (JWT)
 
+## How To Use:
+Using Node Packet Manager (NPM)
+1. Go To Server Directory __cd server__
+2. Run __npm start__
+3. Open Client Directory __cd ../ client__
+4. Run __npm start__
+
 Developed in Visual Studio Code with Docker & Postman.
 
 __Link to demonstration video:__ https://youtu.be/DzmKksPk8nU
